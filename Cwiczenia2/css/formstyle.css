@@ -1,0 +1,28 @@
+label {
+    color: red;
+}
+
+form {
+    border-style: dotted;
+    border-color: blue;
+    width: 350px;
+    background-color: lightcyan;
+}
+
+input[type=text] {
+    background-color: lightseagreen;
+    color: white;
+}
+
+input[type=submit] {
+    border-color: black;
+    border-width: 2px;
+}
+
+select {
+    background-color: thistle;
+}
+
+textarea {
+    background-color: yellow
+}

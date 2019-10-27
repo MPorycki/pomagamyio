@@ -1,0 +1,42 @@
+body {
+    background-color: violet;
+}
+
+h1 {
+    color: red;
+    text-align: center;
+}
+
+h5 {
+    font-size: 24px;
+}
+
+table {
+    border-collapse: inherit;
+    border-style: double;
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+tr {
+    border-style: double;
+}
+
+td {
+    border-style: dotted;
+}
+
+ul {
+    list-style-type: upper-roman;
+}
+
+img {
+    border-style: groove;
+}
