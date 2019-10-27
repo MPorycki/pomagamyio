@@ -1,0 +1,27 @@
+.header {
+    background-color: blanchedalmond;
+    align-content: center;
+    border-bottom-width: 2px;
+    border-bottom-color: black;
+    border-bottom-style: dotted;
+}
+
+footer {
+    background-color: cadetblue;
+    display: block;
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:40px;
+    text-align: center; 
+    line-height: 10px;
+}
+
+.truebody img {
+    float: left;
+}
+
+.floater {
+    width: 49%;
+    float: left;
+}
