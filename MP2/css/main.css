@@ -1,6 +1,6 @@
 body {
     display: grid;
-    grid-template-rows: 50px 4fr 5fr 90px;
+    grid-template-rows: 50px 350px 5fr 90px;
     height: 100%;
     width: 100%;
 }
@@ -58,8 +58,6 @@ body {
     text-align: center;
     filter: grayscale();
 }
-
-
 
 .footer {
     background-color: cadetblue;

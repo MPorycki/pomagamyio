@@ -12,3 +12,25 @@
     width: 35%;
     justify-items: center;
 }
+
+.truebody {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 4fr 3fr 4fr;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    grid-row: 3;
+    border-style: dotted;
+}
+.truebody h1 {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    text-align: center;
+}
+
+.truebody h4 {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+}
