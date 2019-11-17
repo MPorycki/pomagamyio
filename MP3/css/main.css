@@ -3,6 +3,7 @@ body {
     grid-template-rows: 50px 350px 5fr 90px;
     height: 100%;
     width: 100%;
+    margin: 0;
 }
 
 .header {
@@ -46,12 +47,10 @@ body {
     background-repeat: no-repeat;
     background-size: 100% 100%;
     /*filter: blur(8px);*/
-    border-style: dotted;
     display: flex;
     justify-content: center;
     align-items: center;
     grid-row: 2;
-    border-style: dotted;
 }
 
 .bigimage h1 {
@@ -66,7 +65,6 @@ body {
     height:90px;
     text-align: center; 
     line-height: 1px;
-    border-style: dotted;
     font-size: 15px;
     grid-row: 4;
 }

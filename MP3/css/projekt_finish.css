@@ -1,7 +1,6 @@
 .truebody {
     display: grid;
-    grid-template-columns: 2fr 5fr 2fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-columns: 4fr 5fr 4fr;
     width: 100%;
     align-items: center;
     justify-items: center;
@@ -10,22 +9,20 @@
 
 .truebody form {
     grid-column: 2;
-    grid-row: 2;
     display: grid;
-    grid-template-columns: 4fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr;
     width: 100%;
 }
-.truebody form label {
-    text-align: center;
+
+.participants {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    justify-content: center;
 }
 
-.namelebel {
-    grid-column: 1;
-    text-align: center;
-}
-
-.truebody form input {
-    grid-column: 2;
+.visible_col {
+    border: 1px solid black;
 }
 
 .lebel {
@@ -34,7 +31,7 @@
     text-align: center;
 }
 
-.radio{
+.success{
     grid-column-start: 1;
     grid-column-end: 3;
     display: flex;
@@ -53,11 +50,6 @@
 .truebody form input[type=submit] {
     grid-column-start: 1;
     grid-column-end: 3;
-    width: 25%;
-    margin: 0 0 0 40%;
-}
-
-.truebody h1 {
-    grid-row: 1;
-    grid-column: 2;
+    width: 20%;
+    margin: 25px 25px 0 40%;
 }

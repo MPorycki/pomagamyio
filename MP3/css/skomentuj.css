@@ -21,7 +21,6 @@
     align-items: center;
     justify-items: center;
     grid-row: 3;
-    border-style: dotted;
 }
 .truebody h1 {
     grid-column-start: 2;

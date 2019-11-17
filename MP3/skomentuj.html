@@ -29,13 +29,28 @@
             </h1>
             </div>
         </div>
-        <form id="kom_form" action="kom_dodany.html">
+        <form id="kom_form" action="kom_dodany.html" onsubmit="return validate_form()" name="kom_form">
         <div class="truebody">
                 <h1>Dodaj swój komentarz</h1>
-                <textarea id="komentarz" ></textarea>
+                <textarea form="kom_form" id="komentarz" name="komentarz"></textarea>
                 <input type="submit" id="skomentuj" value="Skomentuj">
-            
         </div>
+        
+        <script>
+            function validate_form(){
+                if (validate_comment()){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function validate_comment(){
+                var descr_obj = document.forms["kom_form"]["komentarz"];
+                var descr = descr_obj.value;
+
+            }
+        </script>
     </form>
 
 
