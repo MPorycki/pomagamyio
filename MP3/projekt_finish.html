@@ -1,0 +1,196 @@
+<html>
+    <head>
+        <title>Pomagajmy.io</title>
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/projekt_finish.css" />
+    </head>
+    <body>
+            <div class="header">
+                    <div onclick="location.href='index.html';" class="leftbuttons menubuttons">
+                        <h4>Strona główna</h4>
+                    </div>
+                    <div onclick="location.href='all_projekty.html';" class="leftbuttons menubuttons">
+                        <h4>Projekty</h4>
+                    </div>
+                    <div onclick="location.href='my_projekty.html';" class="leftbuttons menubuttons">
+                        <h4>Moje Projekty</h4>
+                    </div>
+                    <div onclick="location.href='ranking.html';" class="leftbuttons menubuttons">
+                        <h4>Ranking Serc</h4>
+                    </div>
+                    <div onclick="location.href='login.html';" class="menubuttons registrations">
+                            <h4>Logowanie/Rejestracja</h4>
+                    </div>
+                </div>
+        <div class="bigimage">
+            <div>
+            <h1>
+                Nazwa projektu
+            </h1>
+            </div>
+        </div>
+        <div class="truebody">
+            <form name="register" id="form" action="projekt_finish_thx.html" target="_blank" method="POST" onsubmit="return validate_form()">
+                <h4>Czy projekt zakończył się sukcesem?</h4>
+                <div class="success">
+                    <input type="radio" name="success" value="yes"> Tak
+                    <input type="radio" name="success" value="no" checked> Nie
+                </div>
+                <h4>Jeśli tak - zaznacz uczestników, którzy przyczynili się do sukcesu</h4>
+                <div class="participants">
+                    <table>
+                            <colgroup>
+                                <col span="1" style="width: 10%;">
+                                <col span="1" style="width: 45%;">
+                                <col span="1" style="width: 45%;">
+                            </colgroup>
+                            <tr style="background-color: lightslategray">
+                                <td style="background-color: white"></td>
+                                <td class="visible_col">Uzytkownik</td>
+                                <td class="visible_col">Rola</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="user1" value="JKowalski92"></td>
+                                <td class="visible_col">JKowalski92</td>
+                                <td class="visible_col">Twórca</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="user2" value="KNowak12"></td>
+                                <td class="visible_col">KNowak12</td>
+                                <td class="visible_col">Grafik</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="user3" value="ZJanczak"></td>
+                                <td class="visible_col">ZJanczak</td>
+                                <td class="visible_col">Stolarz</td>
+                            </tr>
+                    </table>
+                </div>
+
+                <input type="submit" value="Zakończ projekt">
+            </form>
+            
+        </div>
+        <script>
+            var profile_pic_size_check = true;
+            function validate_form(){
+                return true;
+            }
+
+            function add_error_text(element_name, text){
+                var form = document.getElementById(element_name);
+                form.textContent = text;
+            }
+
+            function validate_name(){
+                var name_obj = document.forms["register"]["name"];
+                name = name_obj.value;
+                var name_regex = /[A-Z].*/;
+                if (name.length > 24) {
+                    name_obj.style.borderColor = "red";
+                    add_error_text("name_error", "Nazwa jest za dluga");
+                    return false;
+                } else if (name.length == 0) {
+                    name_obj.style.borderColor = "red";
+                    add_error_text("name_error", "Projekt musi miec nazwę");
+                    return false;
+                } else if (!name_regex.test(name)){
+                    name_obj.style.borderColor = "red";
+                    add_error_text("name_error", "Nazwa musi zaczynac sie od duzej litery");
+                    return false;
+                }
+                name_obj.style.borderColor = "grey";
+                add_error_text("name_error", "");
+                return true;
+            }
+
+            function validate_description(){
+                var descr_obj = document.forms["register"]["description"];
+                var descr = descr_obj.value;
+                var regex = /[A-Z].*\. ?[A-Z].*\.?/
+                if (descr.length == 0){
+                    descr_obj.style.borderColor = "red";
+                    add_error_text("description_error", "Projekt musi mieć opis");
+                    return false;
+                } else if (descr.length > 2048) {
+                    descr_obj.style.borderColor = "red";
+                    add_error_text("description_error", "Opis jest za długi");
+                    return false;
+                } else if (!regex.test(descr)){
+                    descr_obj.style.borderColor = "red";
+                    add_error_text("description_error", "Opis musi mieć conajmniej 2 zdania");
+                    return false;
+                }
+                descr_obj.style.borderColor = "grey";
+                add_error_text("description_error", "");
+                return true;
+            }
+
+            function validate_people_req(){
+                var ppl_req_obj = document.forms["register"]["people_req"];
+                var ppl_req = ppl_req_obj.value;
+                if (ppl_req != parseInt(ppl_req, 10)){
+                    ppl_req_obj.style.borderColor = "red";
+                    add_error_text("people_req_error", "Proszę podać liczbę");
+                    return false;
+                } else if (ppl_req < 0) {
+                    ppl_req_obj.style.borderColor = "red";
+                    add_error_text("people_req_error", "Proszę podać liczbę dodatnią");
+                    return false;
+                } else if (ppl_req > 12) {
+                    ppl_req_obj.style.borderColor = "red";
+                    add_error_text("people_req_error", "Projekt moze potrzebować max 12 czlonkow");
+                    return false;
+                }
+                ppl_req_obj.style.borderColor = "grey";
+                add_error_text("people_req_error", "");
+                return true;
+            }
+
+            function validate_profile_pic(){
+                var profile_pic_obj = document.forms["register"]["profile_pic"];
+                var profile_pic = profile_pic_obj.files;
+                var name_regex_png = /.*\.png/
+                var name_regex_jpg = /.*\.jpg/
+                if (profile_pic.length == 0){
+                    profile_pic_obj.style.borderColor = "red";
+                    add_error_text("profile_pic_error", "Zdjecie profilowe jest wymagane");
+                    return false;
+                }
+                else if (!(name_regex_jpg.test(profile_pic[0].name) || name_regex_png.test(profile_pic[0].name))){
+                    profile_pic_obj.style.borderColor = "red";
+                    add_error_text("profile_pic_error", "Zdjecie musi byc w formacie .png lub .jpg");
+                    return false;
+                }
+                var fr = new FileReader;
+                    fr.onload = function() {
+                        var img = new Image;
+                        
+                        img.onload = function() {
+                            if (img.width > img.height){
+                                profile_pic_obj.style.borderColor = "red";
+                                add_error_text("profile_pic_error", "Zdjecie musi miec wieksza szerokosc niz wysokosc");
+                            } else {
+                                add_error_text("profile_pic_error", "");
+                            }
+                        };
+                        
+                        img.src = fr.result;
+                    };
+                    
+                    fr.readAsDataURL(profile_pic[0]);
+                if (document.getElementById("profile_pic_error").textContent.length != 0){
+                    return false;
+                }
+                return true;
+            }
+
+        </script>
+
+        <div class="footer">
+            <p>Prowadzone przez Fundacja Pomagajmy.io</p> <br>
+            <p> Ul. Pomocna 4 </p> <br>
+            <p>05-222 Warszawa</p>
+        </div>
+    </body>
+</html>

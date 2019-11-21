@@ -1,0 +1,18 @@
+.truebody {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    grid-row: 3;
+    
+}
+
+.truebody table {
+    border: 2px solid black;
+    width: 25%;
+    text-align: center;
+}
+
+.truebody td {
+    border: 1px solid black;
+}

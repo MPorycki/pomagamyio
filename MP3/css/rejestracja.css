@@ -1,0 +1,36 @@
+.truebody {
+    display: grid;
+    grid-template-columns: 4fr 3fr 4fr;
+    grid-template-rows: 1fr 4fr;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    grid-row: 3;
+}
+
+.truebody form {
+    grid-column: 2;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.truebody form label {
+    grid-column: 1;
+    text-align: center;
+}
+
+.truebody form input {
+    grid-column: 2;
+}
+
+.truebody form input[type=submit] {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 50%;
+    margin: 0 0 0 25%;
+}
+
+.truebody h1 {
+    grid-row: 1;
+    grid-column: 2;
+}

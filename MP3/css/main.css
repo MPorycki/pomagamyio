@@ -1,0 +1,70 @@
+body {
+    display: grid;
+    grid-template-rows: 50px 350px 5fr 90px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.header {
+    background-color: lightgoldenrodyellow ;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 5fr 2fr;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    grid-row: 1;
+}
+
+.menubuttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 50px;
+}
+
+.leftbuttons {
+    float:left;
+}
+
+.menubuttons:hover {
+    /* TODO do poprawki kolor */
+    background-color: purple;
+}
+
+.registrations:hover {
+    /* TODO do poprawki kolor */
+    background-color: purple;
+}
+.registrations {
+    grid-column-start: 6;
+}
+
+.bigimage {
+    background-image: url("https://tse2.mm.bing.net/th?id=OIP.KN1hZZtINXWBWHe3-vWHtAHaEo&pid=Api");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    /*filter: blur(8px);*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2;
+}
+
+.bigimage h1 {
+    text-align: center;
+    filter: grayscale();
+}
+
+.footer {
+    background-color: cadetblue;
+    display: block;
+    bottom:0;
+    height:90px;
+    text-align: center; 
+    line-height: 1px;
+    font-size: 15px;
+    grid-row: 4;
+}
