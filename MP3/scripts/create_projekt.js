@@ -125,7 +125,7 @@ function check_img_width_profile(input) {
         var img = new Image;
             
         img.onload = function() {
-            if (img.width < img.height){
+            if (img.width > img.height){
                 add_error_text("profile_pic_error", "Zdjecie musi miec wieksza wysokosc niz szerokosc");
             } else {
                 add_error_text("profile_pic_error", "");

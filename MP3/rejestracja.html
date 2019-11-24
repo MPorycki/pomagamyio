@@ -42,25 +42,25 @@
                 <label class="lebel" id="email_error"></label> <br>
 
                 <label class="namelebel" for="3">Imię</label>
-                <input type="text" id="3" name="input1">
+                <input type="text" id="3" name="name">
                 <label class="lebel" id="name_error"></label> <br>
 
                 <label class="namelebel" for="4">Nazwisko</label>
-                <input type="text" id="4" name="input1">
-                <label class="lebel" id="name_error"></label> <br>
+                <input type="text" id="4" name="surname">
+                <label class="lebel" id="surname_error"></label> <br>
 
                 <label class="namelebel" for="4">Zdjęcie profilowe</label>
-                <input type="file" id="4" name="profile_pic">
+                <input type="file" id="profile_pic" name="profile_pic" onchange="check_img_width_profile(this);">
                 <label class="lebel" id="profile_pic_error"></label> <br>
 
                 <label class="namelebel" for="5">Hasło</label>
-                <input type="password" id="5" name="input1">
-                <label class="lebel" id="profile_pic_error"></label> <br>
+                <input type="password" id="pass" name="password">
+                <label class="lebel" id="password_error"></label> <br>
 
                 <label class="namelebel" for="6">Powtórz hasło</label>
-                <input type="password" id="6" name="input1">
-                <label class="lebel" id="profile_pic_error"></label> <br>
-                
+                <input type="password" id="pass_repeat" name="password_repeat">
+                <label class="lebel" id="password_repeat_error"></label> <br>
+
                 <input type="submit" value="Zarejestruj się">
             </form>
             

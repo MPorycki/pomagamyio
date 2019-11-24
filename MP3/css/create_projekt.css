@@ -19,11 +19,6 @@
     text-align: center;
 }
 
-.namelebel {
-    grid-column: 1;
-    text-align: center;
-}
-
 .truebody form input {
     grid-column: 2;
 }
