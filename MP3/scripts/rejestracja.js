@@ -3,10 +3,13 @@ function validate_form(){
         console.log("start");
     var val_login = validate_login();
     var val_email = validate_email();
-    var vali_name = validate_name();
-    var vali_surname = validate_surname();
-    var vali_profile_pic = validate_profile_pic();
-    var vali_password = validate_password();
+    var val_name = validate_name();
+    var val_surname = validate_surname();
+    var val_profile_pic = validate_profile_pic();
+    var val_password = validate_password();
+    if (val_login && val_email && val_name && val_surname && val_profile_pic && val_password){
+        return true;
+    }
     return false;
     } catch (err) {
         console.log(err);

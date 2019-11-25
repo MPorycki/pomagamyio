@@ -8,14 +8,19 @@
 
 #skomentuj {
     grid-column-start: 2;
-    grid-row-start: 3;
+    grid-row-start: 4;
     width: 35%;
     justify-items: center;
 }
 
+.lebel {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    color: red;
+}
 .truebody {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 3fr 3fr 1fr 3fr;
     grid-template-columns: 4fr 3fr 4fr;
     width: 100%;
     align-items: center;
