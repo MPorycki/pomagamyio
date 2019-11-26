@@ -1,6 +1,5 @@
 function validate_form(){
     try {
-        console.log("start");
     var val_login = validate_login();
     var val_email = validate_email();
     var val_name = validate_name();
@@ -9,8 +8,9 @@ function validate_form(){
     var val_password = validate_password();
     if (val_login && val_email && val_name && val_surname && val_profile_pic && val_password){
         return true;
+    } else {
+        return false;
     }
-    return false;
     } catch (err) {
         console.log(err);
         return false;
@@ -25,7 +25,7 @@ function add_error_text(element_name, text){
 function validate_login(){
     var login_obj = document.forms["register"]["login"];
     var login = login_obj.value;
-    var existing_logins = ['JKowalski92', 'KNowak12', 'Zjanczak'];
+    var existing_logins = ['JKowalski92', 'KNowak12', 'Zjanczak']; // dummy function
     if (login.length > 15) {
         login_obj.style.borderColor = "red";
         add_error_text("login_error", "Login jest za dlugi");
@@ -70,7 +70,7 @@ function validate_email(){
 function validate_name(){
     var name_obj = document.forms["register"]["name"];
     var name = name_obj.value;
-    var name_regex = /^[A-Z][a-z].*$/;
+    var name_regex = /^[A-Z]?[a-z].*$/;
     if (name.length > 32) {
         name_obj.style.borderColor = "red";
         add_error_text("name_error", "Imię jest za dlugie");
@@ -92,7 +92,7 @@ function validate_name(){
 function validate_surname(){
     var surname_obj = document.forms["register"]["surname"];
     var surname = surname_obj.value;
-    var surname_regex = /^[A-Z][a-z]*-?[A-Z][a-z]*/;
+    var surname_regex = /^[A-Z][a-z]*-?[A-Z]?[a-z]*/;
     if (surname.length > 64) {
         surname_obj.style.borderColor = "red";
         add_error_text("surname_error", "Nazwisko jest za dlugie");
