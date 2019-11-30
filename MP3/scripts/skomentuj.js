@@ -1,7 +1,11 @@
 function validate_form(){
     try {
     var vali_kom = validate_comment();
-    return false;
+    if (vali_kom) {
+        return true;
+    } else {
+        return false;
+    }
     } catch (err) {
         console.log(err);
         return false;
