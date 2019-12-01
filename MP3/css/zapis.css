@@ -1,47 +1,40 @@
+#komentarz {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+}
+
+#skomentuj {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    width: 35%;
+    justify-items: center;
+}
+
+.lebel {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    color: red;
+}
 .truebody {
     display: grid;
-    grid-template-columns: 2fr 8fr 2fr;
-    grid-template-rows: 1fr 4fr;
+    grid-template-rows: 3fr 1fr 1fr;
+    grid-template-columns: 4fr 3fr 4fr;
     width: 100%;
     align-items: center;
     justify-items: center;
     grid-row: 3;
 }
-
-.truebody form {
-    grid-column: 2;
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: 2fr 3fr 2fr;
-    width:75%
-}
-.truebody form label {
+.titles {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    display: flex;
+    flex-direction: column;
     text-align: center;
 }
 
-.namelebel {
-    grid-column: 1;
+.truebody h4 {
+    grid-column-start: 2;
+    grid-row-start: 2;
     text-align: center;
-}
-
-.truebody form input {
-    grid-column: 2;
-}
-
-.lebel {
-    grid-column: 3;
-    color: red;
-    text-align: center;
-}
-
-.truebody form input[type=submit] {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    width: 50%;
-    margin: 0 0 0 25%;
-}
-
-.truebody h1 {
-    grid-row: 1;
-    grid-column: 2;
 }
