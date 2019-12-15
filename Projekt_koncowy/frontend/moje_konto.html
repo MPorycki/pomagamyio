@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>Pomagajmy.io</title>
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/moje_konto.css" />
+        <script src="scripts/moje_konto.js"></script>
+    </head>
+    <body>
+            <div class="header">
+                    <div onclick="location.href='index.html';" class="leftbuttons menubuttons">
+                        <h4>Strona główna</h4>
+                    </div>
+                    <div onclick="location.href='all_projekty.html';" class="leftbuttons menubuttons">
+                        <h4>Projekty</h4>
+                    </div>
+                    <div onclick="location.href='my_projekty.html';" class="leftbuttons menubuttons">
+                        <h4>Moje Projekty</h4>
+                    </div>
+                    <div onclick="location.href='ranking.html';" class="leftbuttons menubuttons">
+                        <h4>Ranking Serc</h4>
+                    </div>
+                    <div onclick="location.href='login.html';" class="menubuttons registrations">
+                            <h4>Logowanie/Rejestracja</h4>
+                    </div>
+                </div>
+        <div class="bigimage">
+            <div>
+            <h1>
+                Moje konto
+            </h1>
+            </div>
+        </div>
+        <div class="truebody">
+            <div class="left_col cols">
+                <form action="moje_konto.html" method="POST" name="konto_form" onsubmit="return validate_changes();">
+                        <label for="1">Login</label>
+                        <input type="text" id="1" name="login" value="JKowalski92"> <br>
+                        <label for="3">Imię</label>
+                        <input type="text" id="3" name="name" value="Jan"> <br>
+                        <label for="4">Nazwisko</label>
+                        <input type="text" id="4" name="surname" value="Kowalski"><br>
+                        <label for="2">Email</label>
+                        <input type="text" id="2" name="email" value="jkowalski92@gmail.com"><br>
+                        <label for="2">Pokazuj imię i nazwisko</label>
+                        <input type="checkbox" idname="show_name" value="Yes"> 
+                        <input type="submit" value="Zapisz zmiany">
+                    </form>
+                <div class="hearts">
+                    <div>
+                    <img src="img/heart.png" alt="">
+                    </div>
+                    <h1>12</h1>
+                </div>
+                <div class="participating_projects">
+                    <table>
+                            <table>
+                                <colgroup>
+                                    <col span="1" style="width: 55%;">
+                                    <col span="1" style="width: 35%;">
+                                </colgroup>
+                                <tr style="background-color: lightslategray">
+                                    <td>Dzialam w projektach</td>
+                                    <td>Rola</td>
+                                </tr>
+                                <tr>
+                                    <td>Projekt1</td>
+                                    <td>Twórca</td>
+                                </tr>
+                                <tr>
+                                    <td>Projekt2</td>
+                                    <td>Grafik</td>
+                                </tr>
+                                <tr>
+                                    <td>Projekt3</td>
+                                    <td>Stolarz</td>
+                                </tr>
+                            </table>
+                    </table>
+                </div>
+            </div>
+            <div class="right_col">
+                <img src="img/generic.png" alt="">
+                <button>Zmień zdjęcie profilowe</button>
+                <button>Resetuj hasło</button>
+                <button>Wyloguj</button>
+            </div>
+            
+        </div>
+
+        <div class="footer">
+            <p>Prowadzone przez Fundacja Pomagajmy.io</p> <br>
+            <p> Ul. Pomocna 4 </p> <br>
+            <p>05-222 Warszawa</p>
+        </div>
+    </body>
+</html>
