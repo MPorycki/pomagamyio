@@ -7,10 +7,11 @@ from sqlalchemy import (
     String,
     TIMESTAMP,
     ForeignKey,
-    JSON
+    JSON,
+    Boolean,
 )
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 
 db = create_engine(
     "postgresql+psycopg2://MCAdmin:uwq8SZYxC<V6HR2et["
@@ -38,7 +39,7 @@ def session_scope(_session=None):
 
 
 class Accounts(base):
-    __tablename__ = "pomagamy_accounts"
+    __tablename__ = "accounts"
 
     id = Column(String(length=32), primary_key=True)
     name = Column(String(length=32))
@@ -53,7 +54,7 @@ class Accounts(base):
 
 
 class Sessions(base):
-    __tablename__ = "pomagamy_sessions"
+    __tablename__ = "sessions"
 
     um_accounts_id = Column(
         String(length=32),
@@ -63,23 +64,9 @@ class Sessions(base):
     created_at = Column(TIMESTAMP)
 
 
-class Adresses(base):
-    __tablename__ = "pomagamy_adresses"
-    id = Column(String(length=32), primary_key=True)
-    id_initiative = Column(
-        String(length=32),
-        ForeignKey(Projects.id, onupdate="CASCADE", ondelete="CASCADE"), # todo jak to reference ogarnac
-    )
-    city = Column(String)
-    zip_code = Column(String)
-    street = Column(String)
-    building_no = Column(Integer)
-    flat_no = Column(Integer)
-    exact_location = Column(Integer) # TODO czy da rade bool?
-
-
 class Projects(base):
-    __tablename__ = "pomagamy_projects"
+    __tablename__ = "projects"
+
     id = Column(String(length=32), primary_key=True)
     id_owner = Column(
         String(length=32),
@@ -92,15 +79,31 @@ class Projects(base):
     end_date = Column(TIMESTAMP)
     created_at = Column(TIMESTAMP)
     type = Column(String)
-    id_adress = Column(
-        String(length=32),
-        ForeignKey(Adresses.id, onupdate="CASCADE", ondelete="CASCADE"),
-    )
+    id_adress = relationship("Adresses", uselist=False, back_populates="projects")
     requested_participants = Column(Integer)
-    is_active = Column(Integer) # TODO czy da rade bool?
+    is_active = Column(Boolean)
+
+
+class Adresses(base):
+    __tablename__ = "adresses"
+
+    id = Column(String(length=32), primary_key=True)
+    id_initiative = Column(
+        String(length=32),
+        ForeignKey(Projects.id, onupdate="CASCADE", ondelete="CASCADE"),
+    )
+    initiative = relationship("Projects", back_populates="adresses")
+    city = Column(String)
+    zip_code = Column(String)
+    street = Column(String)
+    building_no = Column(Integer)
+    flat_no = Column(Integer)
+    exact_location = Column(Boolean)
 
 
 class Comments(base):
+    __tablename__ = "comments"
+
     id = Column(String(length=32), primary_key=True)
     id_owner = Column(
         String(length=32),
@@ -117,6 +120,8 @@ class Comments(base):
 
 
 class InitiativesParticipants(base):
+    __tablename__ = "initiatives_participants"
+
     id = Column(String(length=32), primary_key=True)
     id_participant = Column(
         String(length=32),
@@ -128,4 +133,6 @@ class InitiativesParticipants(base):
     )
     joined_at = Column(TIMESTAMP)
     role = Column(String)
-    contributed = Column(Integer) # TODO czy da rade bool?
+    contributed = Column(Boolean)
+
+base.metadata.create_all(db)
