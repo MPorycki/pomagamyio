@@ -1,0 +1,11 @@
+menu zmienic!
+uzywac li liste z paddingiem, nie bawić się
+Inline block zeby sie ukladaly kolo siebie
+
+Radio button - etykieta - klikanie na tekscie tez od razu zaznacza
+
+Odleglosc od ikonki edycji wieksza no i większa ikonka
+
+Usuwanie
+
+Przekombinowane cssy, za duzo grida i flexa, mozna lepiej bylo to ogarnać
