@@ -3,6 +3,7 @@
         <title>Pomagajmy.io</title>
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/skomentuj.css" />
+        <script src="scripts/skomentuj.js"></script>
     </head>
     <body>
             <div class="header">
@@ -29,28 +30,13 @@
             </h1>
             </div>
         </div>
-        <form id="kom_form" action="kom_dodany.html" onsubmit="return validate_form()" name="kom_form">
+        <form id="kom_form" action="kom_dodany.html" onsubmit="return validate_form();" name="kom_form">
         <div class="truebody">
                 <h1>Dodaj swój komentarz</h1>
                 <textarea form="kom_form" id="komentarz" name="komentarz"></textarea>
                 <input type="submit" id="skomentuj" value="Skomentuj">
+                <label class="lebel" id="kom_error"></label>
         </div>
-        
-        <script>
-            function validate_form(){
-                if (validate_comment()){
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            function validate_comment(){
-                var descr_obj = document.forms["kom_form"]["komentarz"];
-                var descr = descr_obj.value;
-
-            }
-        </script>
     </form>
 
 

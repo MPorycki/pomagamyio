@@ -2,7 +2,8 @@
     <head>
         <title>Pomagajmy.io</title>
         <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" href="css/kom_dodany.css" />
+        <link rel="stylesheet" href="css/skomentuj.css" />
+        <script src="scripts/skomentuj.js"></script>
     </head>
     <body>
             <div class="header">
@@ -29,10 +30,19 @@
             </h1>
             </div>
         </div>
+        <form id="kom_form" action="kom_dodany.html" onsubmit="return validate_form();" name="kom_form">
         <div class="truebody">
-            <h1>Dziękujemy za dodanie komentarza!</h1>
-            <button onclick="location.href='projekt.html';" id="skomentuj">Powrót do projektu</button>
+                <h1>Edytuj komentarz</h1>
+                <textarea form="kom_form" id="komentarz" name="komentarz">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </textarea>
+                <input type="submit" id="skomentuj" value="Zaktualizuj">
+                <label class="lebel" id="kom_error"></label>
         </div>
+    </form>
+
+
+
         <div class="footer">
             <p>Prowadzone przez Fundacja Pomagajmy.io</p> <br>
             <p> Ul. Pomocna 4 </p> <br>

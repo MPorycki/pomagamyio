@@ -2,7 +2,8 @@
     <head>
         <title>Pomagajmy.io</title>
         <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" href="css/kom_dodany.css" />
+        <link rel="stylesheet" href="css/zapis.css" />
+        <script src="scripts/skomentuj.js"></script>
     </head>
     <body>
             <div class="header">
@@ -29,10 +30,18 @@
             </h1>
             </div>
         </div>
+        <form id="rola_form" action="projekt.html" name="rola_form">
         <div class="truebody">
-            <h1>Dziękujemy za dodanie komentarza!</h1>
-            <button onclick="location.href='projekt.html';" id="skomentuj">Powrót do projektu</button>
+            <div class="titles">
+                <h1>Zapisz się do projektu!</h1><br>
+                <h3>Podaj rolę, którą chcesz pełnić</h3>
+            </div>
+                <input type="text" form="kom_form" id="komentarz" name="rola">
+                <input type="submit" id="skomentuj" value="Zapisz sie">
+                <label class="lebel" id="kom_error"></label>
         </div>
+    </form>
+
         <div class="footer">
             <p>Prowadzone przez Fundacja Pomagajmy.io</p> <br>
             <p> Ul. Pomocna 4 </p> <br>

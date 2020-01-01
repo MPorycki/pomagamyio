@@ -3,7 +3,7 @@
         <title>Pomagajmy.io</title>
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/create_projekt.css" />
-        <script src="scripts/create_projekt.js"></script>
+        <script src="scripts/edytuj_projekt.js"></script>
     </head>
     <body>
             <div class="header">
@@ -26,23 +26,23 @@
         <div class="bigimage">
             <div>
             <h1>
-                Stwórz coś niesamowitego!
+                Nazwa projektu
             </h1>
             </div>
         </div>
         <div class="truebody">
-            <h1>Opisz projekt, który chcesz zrealizować</h1>
-            <form name="register" id="form" action="projekt_thx.html" target="_blank" method="POST" onsubmit="return validate_form()">
+            <h1>Edytuj wybrane pola</h1>
+            <form name="register" id="form" action="my_projekt_edycja.html" target="_blank" method="POST" onsubmit="return validate_form()">
                 <label class="namelebel" for="1">Nazwa inicjatywy</label>
-                <input type="text" id="1" name="name"> 
+                <input type="text" id="1" name="name" value="Nazwa projektu"> 
                 <label class="lebel" id="name_error"></label> <br>
 
                 <label class="namelebel" for="2">Opis</label>
-                <textarea id="2" form="form" style="height: 100px;" name="description"></textarea>
+                <textarea id="2" form="form" style="height: 100px;" name="description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</textarea>
                 <label class="lebel"id="description_error" ></label> <br>
 
                 <label class="namelebel" for="3">Ile osób jest potrzebnych?</label>
-                <input type="text" id="3" name="people_req"> 
+                <input type="text" id="3" name="people_req" value="12"> 
                 <label class="lebel" id="people_req_error"></label> <br>
 
                 <label class="namelebel" for="4">Zdjęcie "profilowe"</label>
@@ -56,19 +56,19 @@
                 <h4>Lokalizacja</h4>
 
                 <label class="namelebel" for="6">Miasto</label>
-                <input type="text" id="6" name="city">
+                <input type="text" id="6" name="city" value="Warszawa">
                 <label class="lebel"id="city_error" ></label> <br>
 
                 <label class="namelebel" for="7">Kod pocztowy</label>
-                <input type="text" id="7" name="zip_code">
+                <input type="text" id="7" name="zip_code" value="05-222">
                 <label class="lebel" id="zip_error"></label> <br>
 
                 <label class="namelebel" for="8">Ulica</label>
-                <input type="text" id="8" name="street">
+                <input type="text" id="8" name="street" value="Krucza">
                 <label class="lebel" id="street_error" ></label> <br>
 
                 <label class="namelebel" for="9">Nr budynku</label>
-                <input type="text" id="9" name="building_no">
+                <input type="text" id="9" name="building_no" value="6">
                 <label class="lebel" id="building_no_error"></label> <br>
 
                 <label class="namelebel" for="6">Nr Mieszkania(opcjonalny)</label>
