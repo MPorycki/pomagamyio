@@ -1,6 +1,8 @@
 from Projekt_koncowy.models import session_scope
 
 
+# READ
+
 def convert_to_dict(query_result):
     return query_result.__dict__
 
@@ -49,3 +51,17 @@ def fetch_all_objects(object_table) -> dict:
     for _object in all_objects_from_db(object_table):
         result[key_name].append(convert_to_dict(_object))
     return result
+
+
+# DELETE
+
+def delete_object(object_table, object_id: str):
+    try:
+        with session_scope() as session:
+            project = get_object(object_table, object_id)
+            project.delete()
+            session.commit()
+        return True
+    except Exception as e:
+        print(e)
+        return False

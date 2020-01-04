@@ -5,6 +5,7 @@ from passlib.hash import sha256_crypt
 from sqlalchemy.exc import IntegrityError
 
 from Projekt_koncowy.models import Accounts, Sessions, session_scope
+from .crud_common import *
 
 # CREATE
 
@@ -27,7 +28,6 @@ def register_user(
     :param username: username of the user, has to be unique
     :return: Info about the success of registration
     """
-    created_at = datetime.datetime.now()
     account_id = uuid.uuid4().hex
     password = sha256_crypt.hash(raw_password)
     name = name
@@ -38,7 +38,7 @@ def register_user(
         id=account_id,
         email=email,
         hashed_password=password,
-        created_at=created_at,
+        created_at=datetime.datetime.now(),
         name=name,
         surname=surname,
         username=username,
@@ -64,56 +64,6 @@ def user_with_given_email_exists(email: str) -> bool:
         return session.query(Accounts).filter(Accounts.email == email).exists()
 
 
-# READ
-
-
-def convert_to_dict(query_result):
-    return query_result.__dict__
-
-
-def get_user(account_id: str) -> Accounts:
-    """
-    Gets a single user record from the database
-    :param account_id: account_id of the user that is supposed to be returned
-    :return: Requested user object
-    """
-    with session_scope() as session:
-        return (
-            session.query.session(Accounts)
-            .filter(Accounts.id == account_id)
-            .first()
-        )
-
-
-def fetch_user(account_id: str) -> dict:
-    """
-    Prepares user data to be sent as JSON to the frontend
-    :param account_id: account_id of the user that is supposed to be returned
-    :return: User data as dict
-    """
-    return convert_to_dict(get_user(account_id))
-
-
-def all_users_from_db() -> Accounts:
-    """
-    Gets all user objects from the database
-    :return: a user object
-    """
-    with session_scope() as session:
-        for user in session.query(Accounts).all():
-            yield user
-
-
-def fetch_all_users() -> dict:
-    """
-    :return: list of all users for frontend
-    """
-    result = {"users": []}
-    for user in all_users_from_db():
-        result["users"].append(convert_to_dict(user))
-    return result
-
-
 # UPDATE
 
 
@@ -123,7 +73,7 @@ def update_user(user_data: dict) -> bool:
     :param user_data: data of the given user account to be updated
     :return:
     """
-    user = get_user(user_data["account_id"])
+    user = get_object(Accounts, user_data["account_id"])
     try:
         with session_scope() as session:
             user.username = user_data["Username"]
@@ -145,37 +95,16 @@ def change_password(account_id: str, new_password: str) -> str:
     :return:
     """
     with session_scope() as session:
-        user = (
-            session.query(Accounts).filter(Accounts.id == account_id).first()
-        )
+        user = get_object(Accounts, account_id)
         new_password_hash = sha256_crypt.hash(new_password)
         user.hashed_password = new_password_hash
+        session.commit()
         return "password_changed"
-    return "password_not_changed"
+    return "password_not_changed" # TODO am I sure this will work?
 
 
 def update_profile_pic():
     pass
-
-
-# DELETE
-
-
-def delete_user(account_id: str):
-    """
-    Deleted an user account
-    :param account_id: account_id of the user that is supposed to be removed
-    :return:
-    """
-    try:
-        with session_scope() as session:
-            user = get_user(account_id)
-            user.delete()
-            session.commit()
-        return True
-    except Exception as e:
-        print(e)
-        return False
 
 
 # AUTHENTICATION

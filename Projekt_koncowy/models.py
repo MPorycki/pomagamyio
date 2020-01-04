@@ -44,8 +44,9 @@ class Accounts(base):
     id = Column(String(length=32), primary_key=True)
     name = Column(String(length=32))
     surname = Column(String(length=32))
-    email = Column(String)
+    email = Column(String, unique=True)
     hashed_password = Column(String)
+    username = Column(String, unique=True)
     created_at = Column(TIMESTAMP)
     updated_at = Column(TIMESTAMP, nullable=True)
     skills = Column(JSON)
@@ -78,7 +79,6 @@ class Projects(base):
     start_date = Column(TIMESTAMP)
     end_date = Column(TIMESTAMP)
     created_at = Column(TIMESTAMP)
-    type = Column(String)
     id_adress = relationship("Adresses", uselist=False, back_populates="projects")
     requested_participants = Column(Integer)
     is_active = Column(Boolean)
@@ -134,5 +134,6 @@ class InitiativesParticipants(base):
     joined_at = Column(TIMESTAMP)
     role = Column(String)
     contributed = Column(Boolean)
+
 
 base.metadata.create_all(db)
