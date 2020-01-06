@@ -17,7 +17,7 @@ def register_user(
     surname: str,
     account_type: str,
     username: str,
-) -> bool:
+) -> dict:
     """
     Registers the user by creating an account record in the database
     :param email: email of the user
@@ -26,13 +26,18 @@ def register_user(
     :param surname: last name of the user
     :param account_type: user or admin
     :param username: username of the user, has to be unique
-    :return: Info about the success of registration
+    :return: Payload with data regarding the registration
     """
+    payload = dict()
+    payload["success"] = False
+    payload["username_taken"] = user_with_given_usernme_exists(username)
+    payload["email_taken"] = user_with_given_email_exists(email)
+    if payload["username_taken"] or payload["email_taken"]:
+        return payload
     account_id = uuid.uuid4().hex
     password = sha256_crypt.hash(raw_password)
     name = name
     surname = surname
-    username = username
     _type = account_type
     new_user = Accounts(
         id=account_id,
@@ -49,19 +54,34 @@ def register_user(
     try:
         with session_scope() as session:
             session.add(new_user)
+            payload["success"] = True
     except IntegrityError:
-        return False
-    return True
+        return payload
+    return payload
 
 
 def user_with_given_email_exists(email: str) -> bool:
     """
-    Verifies whether the provided email belongs to an existing user
+    Verifies whether the provided email already belongs to an existing user
     :param email: Provided email
     :return: Boolean with the result of the check of email existence
     """
     with session_scope() as session:
         return session.query(Accounts).filter(Accounts.email == email).exists()
+
+
+def user_with_given_usernme_exists(username: str) -> bool:
+    """
+    Verifies whether the provided username already belongs to an existing user
+    :param username: Provided username
+    :return: Boolean with the result of the check of username existence
+    """
+    with session_scope() as session:
+        return (
+            session.query(Accounts)
+            .filter(Accounts.username == username)
+            .exists()
+        )
 
 
 # UPDATE
@@ -100,7 +120,7 @@ def change_password(account_id: str, new_password: str) -> str:
         user.hashed_password = new_password_hash
         session.commit()
         return "password_changed"
-    return "password_not_changed" # TODO am I sure this will work?
+    return "password_not_changed"  # TODO am I sure this will work?
 
 
 def update_profile_pic():
@@ -110,13 +130,20 @@ def update_profile_pic():
 # AUTHENTICATION
 
 
-def login(username: str, raw_password: str) -> (str, str):
+def login(username: str, raw_password: str) -> dict:
     """
     Log ins the user based on the username and password they provide
     :param username: username of the customer
     :param raw_password:direct password inputted by the user into the form
     :return: Session_id and the corresponding account_id or None, None if failed
     """
+    payload = dict()
+    payload["correct_pass"] = False
+    payload["session_id"] = None
+    payload["username_exists"] = True
+    if not user_with_given_usernme_exists(username):
+        payload["username_exists"] = False
+        return payload
     with session_scope() as session:
         encrypted_from_db = str(
             session.query(Accounts.hashed_password)
@@ -129,9 +156,12 @@ def login(username: str, raw_password: str) -> (str, str):
             .first()[0]
         )
     if sha256_crypt.verify(raw_password, encrypted_from_db):
-        session_id = create_session_for_user(account_id)
-        return session_id, account_id
-    return None, None
+        payload["session_id"] = create_session_for_user(account_id)
+        payload["account_id"] = account_id
+        payload["correct_pass"] = True
+        return payload
+    else:
+        return payload
 
 
 def create_session_for_user(account_id: str) -> str:
