@@ -2,14 +2,17 @@
     <div class="background">
         <div class="big-image"> </div>
         <div class="big-text">
-            <h1>Pomagajmy.io</h1>  
+            <h1>{{title}}</h1>  
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    
+    name:"BackgroundPic",
+    props: {
+        title: String
+    }
 }
 </script>
 

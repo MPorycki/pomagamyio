@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Menu />
-    <BackgroundPic />
+    <BackgroundPic title="Pomagajmy.io"/>
     <router-view />
     <Footer />
   </div>
@@ -31,9 +31,5 @@ export default {
   color: #2c3e50;
   padding:0;
   margin:0;
-}
-
-.footer{
-
 }
 </style>

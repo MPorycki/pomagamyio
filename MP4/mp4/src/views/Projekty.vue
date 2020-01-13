@@ -42,7 +42,9 @@
 
 <script>
 export default {
-    
+    name: "Projekty",
+    components: {
+    },
 }
 </script>
 
