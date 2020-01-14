@@ -18,14 +18,14 @@ export default {
 
 <style scoped>
 .background{
-    height:200px;
+    height:28%;
 }
 .big-image {
     background-image: url("https://tse2.mm.bing.net/th?id=OIP.KN1hZZtINXWBWHe3-vWHtAHaEo");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     filter: blur(8px);
-    height: 200px;
+    height: 100%;
 }
 
 .big-text{

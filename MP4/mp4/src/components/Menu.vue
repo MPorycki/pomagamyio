@@ -22,7 +22,7 @@ export default {
 Zolty background https://www.color-hex.com/color-palette/10221*/
 .header {
     background-color: #fffb96 ;
-    height: 50px;
+    height: 7%;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -37,7 +37,7 @@ ul {
 
 li {
     float: left;
-    height: 50px;
+    height: 7%;
 }
 
 li a {
