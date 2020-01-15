@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Projekty from '../views/Projekty.vue'
+import MyProjekty from '../views/MyProjekty.vue'
+import Ranking from '../views/Ranking.vue'
+import Projekt from '../views/Projekt.vue'
 
 Vue.use(VueRouter)
 
@@ -18,6 +21,21 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: Projekty
+  },
+  {
+    path: '/myprojekty',
+    name: 'myProjekty',
+    component: MyProjekty
+  },
+  {
+    path: '/ranking',
+    name: 'ranking',
+    component: Ranking
+  },
+  {
+    path: '/projekt',
+    name: 'projekt',
+    component: Projekt
   }
 ]
 

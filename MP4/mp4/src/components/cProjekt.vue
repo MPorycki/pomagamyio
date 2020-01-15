@@ -2,7 +2,7 @@
     <div class="body">
         <div class="projekt">
             <img :src="projekt.logo">
-            <h4>{{projekt.title}}</h4>
+            <router-link to="/projekt"><h4>{{projekt.title}}</h4></router-link>
             <h6>{{projekt.description}}</h6>
             <div class="votes">
                 <div class="upvotes" grid-column:1 style="display:flex; background-color: lightgreen">
@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .body {
     /* Chce zeby body jednego projektu zawsze dostawalo 25% width, 50% height przestrzeni zaalokowanej na projekty */ 
-    height: 50%;
+    height: 350px;
     width: 300px;
 }
 .projekt {

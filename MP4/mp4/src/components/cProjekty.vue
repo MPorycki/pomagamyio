@@ -1,7 +1,7 @@
 <template>
     <div class="body">
         <div class="proj_body" v-bind:key="projekt.id" v-for="projekt in projekty">
-            <cProjekt v-bind:projekt="projekt"/>
+            <cProjekt class="proj_obj" v-bind:projekt="projekt"/>
         </div>
     </div>
 </template>
@@ -24,9 +24,18 @@ export default {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-    align-content: space-between;
-    height: 100%;
-    margin: 2%;
-    flex-basis: 200px;
+    align-content: space-around;
+    height: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-basis: 250px;
+    
 }
+
+.proj_obj {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+
 </style>
