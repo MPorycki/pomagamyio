@@ -1,8 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <Menu />
     <BackgroundPic title="Pomagajmy.io"/>
-    <router-view class="body"/>
+    <router-view v-on:add-projekt="test" class="body"/>
     <Footer />
   </div>
 </template>
@@ -18,6 +18,11 @@ export default {
     Menu,
     Footer,
     BackgroundPic
+  },
+  methods: {
+    test (){
+      alert("dziala!");
+    }
   }
 }
 </script>

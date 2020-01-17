@@ -1,5 +1,6 @@
 <template>
-    <div class="truebody">
+    <div class="truebody" v-on:add-projekt="addProjekt">
+        <router-link to="/stworzprojekt" class="stworzProjekt">Stwórz projekt</router-link>
         <cProjekty v-bind:projekty="projects"/>
     </div>
 </template>
@@ -10,6 +11,12 @@ export default {
     name: "Projekty",
     components: {
         cProjekty
+    },
+    methods: {
+        addProjekt(newProjekt){
+            alert("lecimy");
+            this.projects = [...this.projects,newProjekt]
+        }
     },
     data (){
         return {
@@ -61,3 +68,9 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.truebody {
+    margin-top: 10px;
+}
+</style>

@@ -5,6 +5,7 @@ import Projekty from '../views/Projekty.vue'
 import MyProjekty from '../views/MyProjekty.vue'
 import Ranking from '../views/Ranking.vue'
 import Projekt from '../views/Projekt.vue'
+import ProjektCreate from '../views/ProjektCreate.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/projekt',
     name: 'projekt',
     component: Projekt
+  },
+  {
+    path: '/stworzprojekt',
+    name: 'projekt',
+    component: ProjektCreate
   }
 ]
 
