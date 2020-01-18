@@ -37,7 +37,7 @@ export default {
                 created_at: this.get_date()
             }
             // Send up to parent
-                if(!this.validate_form()){
+                if(this.validate_form()){
                     this.$emit('edit-komentarz', editedKomentarz);
                     window.location = '/#/myprojekty';
                     //this.$router.push({ name: "/myprojekty"})

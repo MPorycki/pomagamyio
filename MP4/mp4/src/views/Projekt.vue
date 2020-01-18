@@ -4,7 +4,8 @@
             <router-link :to="{path: '/edytujprojekt', query: {project_id:this.projekt.id}}" tag="button" style="margin-right: 10px">Edytuj projekt</router-link>
             <button v-on:click="delete_projekt">Usuń projekt</button>
         </div>
-        <ProjektItem v-bind:ProjektData="this.projekt" v-bind:UsersProjekt="projektUsers" v-bind:CommentsProjekt="projektComments" v-on:delete-komentarz="delete_komentarz"/>  
+        <ProjektItem v-bind:ProjektData="this.projekt" v-bind:UsersProjekt="projektUsers" v-bind:CommentsProjekt="projektComments" v-on:delete-komentarz="delete_komentarz"
+        v-on:upvote-komentarz="upvoteKomentarz" v-on:downvote-komentarz="downvoteKomentarz"/>  
     </div>
 </template>
 
@@ -34,7 +35,13 @@ export default {
             delete_komentarz(comment_id){
                 this.$emit('delete-komentarz', comment_id)
                 this.load_comments(this.projekt.id)
-            }
+            },
+            upvoteKomentarz(komentarz_id){
+            this.$emit('upvote-komentarz', komentarz_id)
+        },
+            downvoteKomentarz(komentarz_id){
+                this.$emit('downvote-komentarz', komentarz_id);
+        }
         },
         mounted(){
             this.load_project(this.$route.query.project_id);

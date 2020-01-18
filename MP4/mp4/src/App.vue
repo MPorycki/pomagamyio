@@ -11,6 +11,8 @@
     v-on:delete-komentarz="deleteKomentarz"
     v-on:upvote-projekt="upvoteProjekt"
     v-on:downvote-projekt="downvoteProjekt"
+    v-on:upvote-komentarz="upvoteKomentarz"
+    v-on:downvote-komentarz="downvoteKomentarz"
      class="body"/>
     <Footer />
   </div>
@@ -68,11 +70,59 @@ export default {
       this.data.comments = this.data.comments.filter(komentarz => komentarz.id !== komentarz_id);
     },
     upvoteProjekt(projekt_id){
-      this.data.projects.filter(projekt => projekt.id == projekt_id)[0].upvotes += 1;
+      if(!this.alreadyVoted(1, projekt_id, "projekt")){
+        this.data.projects.filter(projekt => projekt.id == projekt_id)[0].upvotes += 1;
+        var newVote = {userId: 1, projektId: projekt_id}
+        this.data.project_votes = [...this.data.project_votes, newVote]
+      } else {
+        alert("Oddales juz glos na ten projekt");
+      }
     },
     downvoteProjekt(projekt_id){
-      this.data.projects.filter(projekt => projekt.id == projekt_id)[0].downvotes += 1;
+      if(!this.alreadyVoted(1, projekt_id, "projekt")){
+        this.data.projects.filter(projekt => projekt.id == projekt_id)[0].downvotes += 1;
+        var newVote = {userId: 1, projektId: projekt_id}
+        this.data.project_votes = [...this.data.project_votes, newVote]
+      } else {
+        alert("Oddales juz glos na ten projekt");
+      }
+    },
+    upvoteKomentarz(komentarz_id){
+      if(!this.alreadyVoted(1, komentarz_id, "komentarz")){
+        this.data.comments.filter(Komentarz => Komentarz.id == komentarz_id)[0].upvotes += 1;
+        var newVote = {userId: 1, komentarzId: komentarz_id}
+        this.data.komentarz_votes = [...this.data.komentarz_votes, newVote]
+      } else {
+        alert("Oddales juz glos na ten projekt");
+      }
+    },
+    downvoteKomentarz(komentarz_id){
+      if(!this.alreadyVoted(1, komentarz_id, "komentarz")){
+        this.data.comments.filter(Komentarz => Komentarz.id == komentarz_id)[0].downvotes += 1;
+        var newVote = {userId: 1, komentarzId: komentarz_id}
+        this.data.komentarz_votes = [...this.data.komentarz_votes, newVote]
+      } else {
+        alert("Oddales juz glos na ten komentarz");
+      }
+    },
+    alreadyVoted(userId, objectId, type){
+      if (type == "projekt"){
+        var projekt;
+        for (projekt of this.data.project_votes){
+          if (projekt.userId == userId && projekt.projektId == objectId){
+            return true;
+          }
+        }
+      } else {
+        var komentarz;
+        for (komentarz of this.data.komentarz_votes){
+          if (komentarz.userId == userId && komentarz.komentarzId == objectId){
+            return true;
+          }
+      }
     }
+    return false;
+  }
   },
   data() {
     return {
@@ -84,42 +134,48 @@ export default {
                     title: "Ciekawa Inicjatywa 1",
                     description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
                     logo: "../img/traj2.gif",
-                    upvotes: 14,
-                    downvotes: 2
+                    people_req: 12,
+                    city: "Warszawa",
+                    zip_code: "05-822",
+                    street: "Krucza",
+                    building_no: 7,
+                    flat_no: 2,
+                    upvotes: 4,
+                    downvotes: 3,
+                    exact_location: true,
+                    ownerId: 1
                 },
                 {
                     id: 2,
                     title: "Ciekawa Inicjatywa 2",
                     description: "Lorem ipsum2",
                     logo: "~assets/img/traj2.gif",
-                    upvotes: 143,
-                    downvotes: 21
+                    people_req: 12,
+                    city: "Warszawa",
+                    zip_code: "05-822",
+                    street: "Krucza",
+                    building_no: 7,
+                    flat_no: 2,
+                    upvotes: 13,
+                    downvotes: 37,
+                    exact_location: true,
+                    ownerId: 2
                 },
                 {
                     id: 3,
                     title: "Ciekawa Inicjatywa 3",
                     description: "Lorem ipsum3",
                     logo: "../img/traj2.gif",
-                    upvotes: 1337,
-                    downvotes: 6
-                }
-                ,
-                {
-                    id: 4,
-                    title: "Ciekawa Inicjatywa 4",
-                    description: "Lorem ipsum3",
-                    logo: "../img/traj2.gif",
-                    upvotes: 1337,
-                    downvotes: 6
-                }
-                ,
-                {
-                    id: 5,
-                    title: "Ciekawa Inicjatywa 5",
-                    description: "Lorem ipsum3",
-                    logo: "../img/traj2.gif",
-                    upvotes: 1337,
-                    downvotes: 6
+                    people_req: 12,
+                    city: "Warszawa",
+                    zip_code: "05-822",
+                    street: "Krucza",
+                    building_no: 7,
+                    flat_no: 2,
+                    upvotes: 21,
+                    downvotes: 37,
+                    exact_location: true,
+                    ownerId: 3
                 }
         ],
         users: [
@@ -153,6 +209,12 @@ export default {
                     userId : 3,
                     projectId: 1   
                 }
+        ],
+        project_votes: [
+
+        ],
+        komentarz_votes: [
+
         ]
       }
     }

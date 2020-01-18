@@ -11,8 +11,9 @@
     </div>
     <div class="address_and_likes">
         <h4>Lokalizacja</h4>
-        <div class="text_box">
-            <h2></h2>
+        <div class="text_box" style="display:inline">
+            <h2>{{build_adress()}}</h2><br>
+            <h2>"Dokładna lokalizacja: " {{this.ProjektData.exact_location}}</h2>
         </div>
         <div class="votes">
             <div class="upvotes" grid-column:1 style="display:flex; background-color: lightgreen">
@@ -72,9 +73,9 @@
                     </th>
                     <th>
                        <div class="up_downvote">
-                            <img src="../assets/img/upvote.png" class="upvote_img" style="margin-right: 5px">
+                            <img src="../assets/img/upvote.png" class="upvote_img" style="margin-right: 5px" v-on:click="emitUpvote(comment.id)">
                             <p class="upvote_no">{{comment.upvotes}}</p>
-                            <img src="../assets/img/downvote.png" class="downvote_img" alt="">
+                            <img src="../assets/img/downvote.png" class="downvote_img" v-on:click="emitDownvote(comment.id)">
                             <p class="downvote_no">{{comment.downvotes}}</p>
                         </div>
                     </th>
@@ -100,7 +101,20 @@ export default {
                 this.$emit('delete-komentarz', comment_id);
                 alert("Komentarz usuniety");
                 this.key +=1;
+            },
+        build_adress(){
+            var flat_number = "";
+            if (this.ProjektData.flat_no != 0){
+                flat_number = "/" + this.ProjektData.flat_no;
             }
+            return (this.ProjektData.street + " " + this.ProjektData.building_no + flat_number+  ", " + this.ProjektData.zip_code + " " + this.ProjektData.city )
+        },
+        emitUpvote(komentarz_id){
+            this.$emit('upvote-komentarz', komentarz_id);
+        },
+        emitDownvote(komentarz_id){
+            this.$emit('downvote-komentarz', komentarz_id);
+        }
     }
 }
 </script>
@@ -131,8 +145,8 @@ export default {
 .text_box{
     grid-column: 2;
     margin-right: 50px;
+    text-align: center;
     display: flex;
-    text-align: justify;
     justify-content: center;
     align-items: center;
 }

@@ -1,7 +1,6 @@
 <template>
     <div class="body">
         <div class="projekt">
-            <img :src="projekt.logo">
             <router-link :to="{path: '/projekt', query: {project_id: projekt.id}}"><h4>{{projekt.title}}</h4></router-link>
             <h6>{{projekt.description}}</h6>
             <div class="votes">

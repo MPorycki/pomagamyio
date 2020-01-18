@@ -193,45 +193,6 @@ export default {
                 reader.readAsDataURL(input.files[0]);
             }
         },
-        check_img_width_background(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                var img = new Image;
-                    
-                img.onload = function() {
-                    if (img.width < 1280){
-                            this.add_error_text("background_pic_error", "Min. szerokosc to 1280 px");
-                        } else {
-                            this.add_error_text("background_pic_error", "");
-                        }
-                };
-                
-                img.src = reader.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-                }
-            },
-        validate_background_pic(){
-            var background_pic_obj = document.forms["register"]["background_pic"];
-            var background_pic = background_pic_obj.files;
-            var name_regex_png = /.*\.png/
-            var name_regex_jpg = /.*\.jpg/
-            if (background_pic.length == 0){
-                background_pic_obj.style.borderColor = "red";
-                this.add_error_text("background_pic_error", "Zdjecie w tle jest wymagane");
-                return false;
-            }
-            else if (!(name_regex_jpg.test(background_pic[0].name) || name_regex_png.test(background_pic[0].name))){
-                background_pic_obj.style.borderColor = "red";
-                this.add_error_text("background_pic_error", "Zdjecie musi byc w formacie .png lub .jpg");
-                return false;
-            }
-            if (document.getElementById("background_pic_error").textContent.length != 0){
-                return false;
-            }
-            return true;
-        },
         validate_city(){
             var city_obj = document.forms["register"]["city"];
             var city = city_obj.value;
@@ -329,7 +290,6 @@ export default {
             var val_description = this.validate_description();
             var val_people_req = this.validate_people_req();
             var val_profile_pic = this.validate_profile_pic();
-            var val_background_pic = this.validate_background_pic();
             var val_city = this.validate_city();
             var val_zip = this.validate_zip();
             var val_street = this.validate_street();
@@ -340,7 +300,6 @@ export default {
             val_description &&
             val_people_req &&
             val_profile_pic &&
-            val_background_pic &&
             val_city &&
             val_zip &&
             val_street &&
