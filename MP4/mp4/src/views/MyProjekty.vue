@@ -1,7 +1,7 @@
 <template>
     <div class="truebody" v-on:add-projekt="addProjekt">
         <router-link to="/stworzprojekt" class="stworzProjekt">Stwórz projekt</router-link>
-        <cProjekty v-bind:projekty="data.projects"/>
+        <cProjekty v-on:upvote-projekt="upvoteProjekt" v-on:downvote-projekt="downvoteProjekt"  v-bind:projekty="data.projects"/>
     </div>
 </template>
 
@@ -13,6 +13,14 @@ export default {
         cProjekty
     },
     props: ["data"],
+    methods: {
+        upvoteProjekt(project_id){
+            this.$emit('upvote-projekt', project_id)
+        },
+        downvoteProjekt(projekt_id){
+            this.$emit('downvote-projekt', projekt_id);
+        }
+    }
 }
 </script>
 

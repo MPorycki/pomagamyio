@@ -48,11 +48,9 @@
             <!--TODO wyswietlanie mozliwosci edycji-->
             <div class="comments_header">
                 <h2>Dyskusja</h2>
-                <form action="skomentuj.html">
-                    <input type="submit" value="Skomentuj">
-                </form>
+                <router-link :to="{path: '/skomentuj', query: {project_id: ProjektData.id, user_id: 1}}" tag="button">Skomentuj</router-link>
             </div>
-            <table>
+            <table> 
                 <colgroup>
                     <col span="1" style="width: 9%;">
                     <col span="1" style="width: 9%;">
@@ -66,10 +64,11 @@
                     <th>Ocena</th>
                 </tr>
                 <tr v-bind:key="comment.id" v-for="comment in CommentsProjekt">
-                    <th>{{comment.date}}</th>
-                    <th>{{comment.userId}}</th>
+                    <th>{{comment.created_at}}</th>
+                    <th>{{find_username(comment.userId)}}</th>
                     <th>{{comment.text}}
-                        <a href="skomentuj_edycja.html"><img src="img/edit.png"  style="width:15px; height: 15px;" alt=""></a>
+                        <router-link :to="{path: 'edytujKomentarz', query: {comment_id: comment.id}}" ><img src="../assets/img/edit.png"  style="width:15px; height: 15px;" alt=""></router-link>
+                        <img src="../assets/img/trash.png"  style="width:15px; height: 15px;" alt="" v-on:click="delete_comment(comment.id)">
                     </th>
                     <th>
                        <div class="up_downvote">
@@ -92,6 +91,16 @@ export default {
         ProjektData: Object,
         UsersProjekt: Array,
         CommentsProjekt: Array
+    },
+    methods: {
+        find_username(userId){
+            return this.UsersProjekt.filter(user => user.id == userId)[0].username;
+        },
+        delete_comment(comment_id) {
+                this.$emit('delete-komentarz', comment_id);
+                alert("Komentarz usuniety");
+                this.key +=1;
+            }
     }
 }
 </script>
@@ -237,12 +246,12 @@ export default {
 .comments_header {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
-.comments_header form {
+.comments_header button {
     display: flex;
-    align-items: center;
-    margin-top: 20px;
+    height: 33%;
     margin-left: 25px;
 }
 

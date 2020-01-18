@@ -7,6 +7,8 @@ import Ranking from '../views/Ranking.vue'
 import Projekt from '../views/Projekt.vue'
 import ProjektCreate from '../views/ProjektCreate.vue'
 import ProjektEdit from '../views/ProjektEdit.vue'
+import KomCreate from '../views/KomCreate.vue'
+import KomEdit from '../views/KomEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +50,16 @@ const routes = [
     path: '/edytujprojekt',
     name: 'projekt',
     component: ProjektEdit
+  },
+  {
+    path: '/skomentuj',
+    name: 'komentarz',
+    component: KomCreate
+  },
+  {
+    path: '/edytujKomentarz',
+    name: 'edytujKomentarz',
+    component: KomEdit
   }
 ]
 

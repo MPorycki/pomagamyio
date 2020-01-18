@@ -2,7 +2,16 @@
   <div id="app" >
     <Menu />
     <BackgroundPic title="Pomagajmy.io"/>
-    <router-view v-bind:data="data" v-on:add-projekt="addProjekt" v-on:delete-projekt="deleteProjekt" v-on:edit-projekt="editProjekt" class="body"/>
+    <router-view v-bind:data="data" 
+    v-on:add-projekt="addProjekt" 
+    v-on:delete-projekt="deleteProjekt" 
+    v-on:edit-projekt="editProjekt" 
+    v-on:add-komentarz="addKomentarz" 
+    v-on:edit-komentarz="editKomentarz" 
+    v-on:delete-komentarz="deleteKomentarz"
+    v-on:upvote-projekt="upvoteProjekt"
+    v-on:downvote-projekt="downvoteProjekt"
+     class="body"/>
     <Footer />
   </div>
 </template>
@@ -28,7 +37,6 @@ export default {
       
       for (projekt of this.data.projects){
         if (projekt.id == editedProjekt.id){
-          alert("edytujemy");
           projekt.title = editedProjekt.title
           projekt.description = editedProjekt.description
           projekt.people_req = editedProjekt.people_req
@@ -43,11 +51,33 @@ export default {
     },
     deleteProjekt(projekt_id){
       this.data.projects = this.data.projects.filter(projekt => projekt.id !== projekt_id);
+    },
+    addKomentarz(newKomentarz){
+          this.data.comments = [...this.data.comments,newKomentarz]
+    },
+    editKomentarz(editedKomentarz){
+      var komentarz;
+        for (komentarz of this.data.comments){
+        if (komentarz.id == editedKomentarz.id){
+          komentarz.text = editedKomentarz.text;
+          komentarz.created_at = editedKomentarz.created_at;
+      }
+      }
+    },
+    deleteKomentarz(komentarz_id){
+      this.data.comments = this.data.comments.filter(komentarz => komentarz.id !== komentarz_id);
+    },
+    upvoteProjekt(projekt_id){
+      this.data.projects.filter(projekt => projekt.id == projekt_id)[0].upvotes += 1;
+    },
+    downvoteProjekt(projekt_id){
+      this.data.projects.filter(projekt => projekt.id == projekt_id)[0].downvotes += 1;
     }
   },
   data() {
     return {
       data: {
+        reloader: 0,
         projects: [
             {
                     id: 1,
@@ -85,7 +115,7 @@ export default {
                 ,
                 {
                     id: 5,
-                    title: "Ciekawa Inicjatywa ",
+                    title: "Ciekawa Inicjatywa 5",
                     description: "Lorem ipsum3",
                     logo: "../img/traj2.gif",
                     upvotes: 1337,
@@ -96,7 +126,33 @@ export default {
 
         ],
         comments: [
-
+                {
+                    id: 1,
+                    created_at: "17.10.2019 15:00",
+                    text: "ABC TEST",
+                    upvotes: 5,
+                    downvotes: 2,
+                    userId : 1,
+                    projectId: 1   
+                },
+                {
+                    id: 2,
+                    created_at: "17.10.2019 15:02",
+                    text: "ABC2 TEST2",
+                    upvotes: 5,
+                    downvotes: 2,
+                    userId : 2,
+                    projectId: 1   
+                },
+                {
+                    id: 3,
+                    created_at: "17.10.2019 15:05",
+                    text: "ABC3 TEST3",
+                    upvotes: 5,
+                    downvotes: 2,
+                    userId : 3,
+                    projectId: 1   
+                }
         ]
       }
     }

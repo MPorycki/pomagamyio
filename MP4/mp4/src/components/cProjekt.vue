@@ -6,11 +6,11 @@
             <h6>{{projekt.description}}</h6>
             <div class="votes">
                 <div class="upvotes" grid-column:1 style="display:flex; background-color: lightgreen">
-                    <img src="../assets/img/upvote.png" alt="Oceń projekt pozytywnie">
+                    <img src="../assets/img/upvote.png" v-on:click="emitUpvote(projekt.id)"  alt="Oceń projekt pozytywnie">
                     <p>{{projekt.upvotes}}</p>
                 </div>
                 <div class="downvotes" grid-column:2 style="display:flex; background-color:indianred">
-                    <img src="../assets/img/downvote.png" alt="Oceń projekt negatywnie">
+                    <img src="../assets/img/downvote.png" v-on:click="emitDownvote(projekt.id)" alt="Oceń projekt negatywnie">
                     <p>{{projekt.downvotes}}</p>
                 </div>
             </div>
@@ -21,7 +21,15 @@
 <script>
 export default {
     name: "cProjekt",
-    props: ["projekt"]
+    props: ["projekt"],
+    methods: {
+        emitUpvote(projekt_id){
+            this.$emit('upvote-projekt', projekt_id);
+        },
+        emitDownvote(projekt_id){
+            this.$emit('downvote-projekt', projekt_id);
+        }
+    }
 }
 
 </script>

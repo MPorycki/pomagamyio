@@ -1,7 +1,7 @@
 <template>
     <div class="body">
         <div class="proj_body" v-bind:key="projekt.id" v-for="projekt in projekty">
-            <cProjekt class="proj_obj" v-bind:projekt="projekt"/>
+            <cProjekt v-on:upvote-projekt="upvoteProjekt" v-on:downvote-projekt="downvoteProjekt" class="proj_obj" v-bind:projekt="projekt"/>
         </div>
     </div>
 </template>
@@ -15,7 +15,15 @@ export default {
     components:{
         cProjekt
     },
-    props: ["projekty"]
+    props: ["projekty"],
+    methods: {
+        upvoteProjekt(projekt_id){
+            this.$emit('upvote-projekt', projekt_id)
+        },
+        downvoteProjekt(projekt_id){
+            this.$emit('downvote-projekt', projekt_id);
+        }
+    }
 }
 </script>
 
