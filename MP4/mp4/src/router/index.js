@@ -6,6 +6,7 @@ import MyProjekty from '../views/MyProjekty.vue'
 import Ranking from '../views/Ranking.vue'
 import Projekt from '../views/Projekt.vue'
 import ProjektCreate from '../views/ProjektCreate.vue'
+import ProjektEdit from '../views/ProjektEdit.vue'
 
 Vue.use(VueRouter)
 
@@ -42,6 +43,11 @@ const routes = [
     path: '/stworzprojekt',
     name: 'projekt',
     component: ProjektCreate
+  },
+  {
+    path: '/edytujprojekt',
+    name: 'projekt',
+    component: ProjektEdit
   }
 ]
 

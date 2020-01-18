@@ -1,6 +1,10 @@
 <template>
     <div class="truebody">
-        <ProjektItem v-bind:ProjektData="projekt" v-bind:UsersProjekt="projektUsers" v-bind:CommentsProjekt="projektComments"/>  
+        <div style="margin-top:30px;">
+            <router-link :to="{path: '/edytujprojekt', query: {project_id:this.projekt.id}}" tag="button" style="margin-right: 10px">Edytuj projekt</router-link>
+            <button v-on:click="delete_projekt">Usuń projekt</button>
+        </div>
+        <ProjektItem v-bind:ProjektData="this.projekt" v-bind:UsersProjekt="projektUsers" v-bind:CommentsProjekt="projektComments"/>  
     </div>
 </template>
 
@@ -13,19 +17,25 @@ export default {
         ProjektItem
         },
         props: {
-            projekt1: Object
+            data: Object
+        },
+        methods: {
+            load_project(projekt_id){
+                this.projekt = this.data.projects.filter(projekt => projekt.id == projekt_id)[0];
+            },
+            delete_projekt() {
+                this.$emit('delete-projekt', this.projekt.id);
+                alert("Projekt usuniety");
+                window.location = '/#/myprojekty';
+            }
+        },
+        mounted(){
+            this.load_project(this.$route.query.project_id);
         },
     data() {
         // TODO do ogarniecia wczytywanie tego z App.vue
         return {
             projekt: {
-                    id: 1,
-                    title: "Ciekawa Inicjatywa 1",
-                    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-                    logo: "../img/traj2.gif",
-                    upvotes: 14,
-                    downvotes: 2,
-                    ownerId: 1,
 
                 },
             projektUsers: [

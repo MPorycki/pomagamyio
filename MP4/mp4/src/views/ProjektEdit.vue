@@ -1,9 +1,9 @@
 <template>
     <div class="truebody">
-            <h1>Opisz projekt, który chcesz zrealizować</h1>
-            <form name="register" id="form" @submit.prevent="addProjekt">
+            <h1>Edytuj projekt</h1>
+            <form name="register" id="form" @submit.prevent="editProjekt">
                 <label class="namelebel" for="1">Nazwa inicjatywy</label>
-                <input type="text" id="1" v-model="title" name="name"> 
+                <input type="text" id="1" v-model="title" name="name">
                 <label class="lebel" id="name_error"></label> <br>
 
                 <label class="namelebel" for="2">Opis</label>
@@ -11,7 +11,7 @@
                 <label class="lebel" id="description_error" ></label> <br>
 
                 <label class="namelebel" for="3">Ile osób jest potrzebnych?</label>
-                <input type="text" id="3" v-model="people_req" name="people_req"> 
+                <input type="text" id="3" v-model="people_req" name="people_req" value=3> 
                 <label class="lebel" id="people_req_error"></label> <br>
 
                 <label class="namelebel" for="4">Zdjęcie "profilowe"</label>
@@ -56,11 +56,12 @@
 </template>
 
 <script>
-import uuid from "uuid";
 export default {
     name:"projektCreate",
+    props: {data: Object},
     data(){
         return {
+            id: 0,
             title: "",
             description: "",
             people_req: 0,
@@ -70,11 +71,23 @@ export default {
             building_no: "",
             flat_no: 0,
             exact_location: true,
-            success:0,
             profile_pic_size_check: true
         }
     },
     methods: {
+        load_project(projekt_id){
+            var projekt = this.data.projects.filter(projekt => projekt.id == projekt_id)[0];
+            this.id = projekt.id;
+            this.title = projekt.title
+            this.description = projekt.description;
+            this.people_req = projekt.people_req;
+            this.city = projekt.city;
+            this.zip_code = projekt.zip_code;
+            this.street = projekt.street;
+            this.building_no = projekt.building_no;
+            this.flat_no = projekt.flat_no;
+            this.exact_location = projekt.exact_location;
+        },
         add_error_text(element_name, text){
             var form = document.getElementById(element_name);
             form.textContent = text;
@@ -338,9 +351,9 @@ export default {
                 return false;
             }
         },
-        addProjekt() {
-                const newProjekt = {
-                    id: uuid.v4(),
+        editProjekt() {
+                const editedProjekt = {
+                    id: this.id,
                     title: this.title,
                     description: this.description,
                     people_req: this.people_req,
@@ -349,18 +362,19 @@ export default {
                     street: this.street,
                     building_no: this.building_no,
                     flat_no: this.flat_no,
-                    upvotes: 0,
-                    downvotes: 0,
                     exact_location: this.exact_location
                 }
                 // Send up to parent
                 if(!this.validate_form()){
-                    this.$emit('add-projekt', newProjekt);
+                    this.$emit('edit-projekt', editedProjekt);
                     window.location = '/#/myprojekty';
                     //this.$router.push({ name: "/myprojekty"})
                 }
         },
          
+    },
+    mounted(){
+        this.load_project(this.$route.query.project_id);
     }
 }
 </script>
