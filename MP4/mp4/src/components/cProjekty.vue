@@ -32,11 +32,12 @@ export default {
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-    align-content: space-around;
+    align-content: space-between;
     height: 90%;
     margin-left: 5%;
     margin-right: 5%;
-    flex-basis: 250px;
+    flex-basis: 350px;
+    padding-top:2%;
     
 }
 

@@ -1,8 +1,7 @@
 <template>
-    <div class="body">
-        <div class="projekt">
+        <div class="cprojekt">
             <router-link :to="{path: '/projekt', query: {project_id: projekt.id}}"><h4>{{projekt.title}}</h4></router-link>
-            <h6>{{projekt.description}}</h6>
+            <h6>{{shorten_desc(projekt.description)}}</h6>
             <div class="votes">
                 <div class="upvotes" grid-column:1 style="display:flex; background-color: lightgreen">
                     <img src="../assets/img/upvote.png" v-on:click="emitUpvote(projekt.id)"  alt="Oceń projekt pozytywnie">
@@ -14,7 +13,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -27,6 +25,13 @@ export default {
         },
         emitDownvote(projekt_id){
             this.$emit('downvote-projekt', projekt_id);
+        },
+        shorten_desc(description){
+            if (description.length > 200) {
+                return description.substring(0, 200) + "..."
+            } else {
+                return description;
+            }
         }
     }
 }
@@ -35,17 +40,19 @@ export default {
 
 
 <style scoped>
-.body {
-    /* Chce zeby body jednego projektu zawsze dostawalo 25% width, 50% height przestrzeni zaalokowanej na projekty */ 
-    height: 350px;
-    width: 300px;
+
+.cprojekt h6 {
+    margin-bottom: 40px;
+    display: block;
 }
-.projekt {
+.cprojekt {
+    display: flex;
+    flex-direction: column;
     border-style: solid;
     border-color: black;
     border-width: 1px;
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    min-height: 190px;
     position: relative;
 }
 

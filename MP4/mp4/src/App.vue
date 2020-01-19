@@ -93,7 +93,7 @@ export default {
         var newVote = {userId: 1, komentarzId: komentarz_id}
         this.data.komentarz_votes = [...this.data.komentarz_votes, newVote]
       } else {
-        alert("Oddales juz glos na ten projekt");
+        alert("Oddales juz glos na ten komentarz");
       }
     },
     downvoteKomentarz(komentarz_id){
