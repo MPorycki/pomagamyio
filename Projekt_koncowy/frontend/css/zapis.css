@@ -1,0 +1,40 @@
+#komentarz {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+}
+
+#skomentuj {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    width: 35%;
+    justify-items: center;
+}
+
+.lebel {
+    grid-column-start: 2;
+    grid-row-start: 3;
+    color: red;
+}
+.truebody {
+    display: grid;
+    grid-template-rows: 3fr 1fr 1fr;
+    grid-template-columns: 4fr 3fr 4fr;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+    grid-row: 3;
+}
+.titles {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.truebody h4 {
+    grid-column-start: 2;
+    grid-row-start: 2;
+    text-align: center;
+}
