@@ -23,9 +23,9 @@ export default {
     },
     data() {
         return {
-            my_projects : this.data.projects.filter(projekt => projekt.id == 1)
+            my_projects : this.data.projects.filter(projekt => projekt.ownerId == 1)
         }
-    }
+    },
 }
 </script>
 

@@ -15,7 +15,7 @@
                 <label class="lebel" id="people_req_error"></label> <br>
 
                 <label class="namelebel" for="4">Zdjęcie "profilowe"</label>
-                <input type="file" id="4" name="profile_pic" onchange="check_img_width_profile(this);">
+                <input type="file" id="4" name="profile_pic" @change="this.check_img_width_profile">
                 <label class="lebel" id="profile_pic_error"></label> <br>
 
                 <h4>Lokalizacja</h4>
@@ -158,22 +158,22 @@ export default {
             return true;
         },
         check_img_width_profile(input) {
-            if (input.files && input.files[0]) {
+            if (input.target.files && input.target.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function () {
-                var img = new Image;
+                    var img = new Image;
+                        
+                    img.onload = function() {
+                        if (img.width > img.height){
+                            document.getElementById("profile_pic_error").textContent = "Zdjecie musi miec wieksza wysokosc niz szerokosc"
+                        } else {
+                            document.getElementById("profile_pic_error").textContent = ""
+                        }
+                    };
                     
-                img.onload = function() {
-                    if (img.width > img.height){
-                        this.add_error_text("profile_pic_error", "Zdjecie musi miec wieksza wysokosc niz szerokosc");
-                    } else {
-                        this.add_error_text("profile_pic_error", "");
-                    }
+                    img.src = reader.result;
                 };
-                
-                img.src = reader.result;
-                };
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(input.target.files[0]);
             }
         },
         validate_city(){

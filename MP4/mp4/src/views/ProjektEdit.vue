@@ -18,10 +18,6 @@
                 <input type="file" id="4" name="profile_pic" onchange="check_img_width_profile(this);">
                 <label class="lebel" id="profile_pic_error"></label> <br>
 
-                <label class="namelebel" for="5">Zdjęcie w tle<br><i>Min. szerokość 1280px</i></label>
-                <input type="file" id="5" name="background_pic" onchange="check_img_width_background(this);"> 
-                <label class="lebel" id="background_pic_error"></label> <br>
-
                 <h4>Lokalizacja</h4>
 
                 <label class="namelebel" for="6">Miasto</label>
@@ -289,7 +285,6 @@ export default {
             var val_name = this.validate_name();
             var val_description = this.validate_description();
             var val_people_req = this.validate_people_req();
-            var val_profile_pic = this.validate_profile_pic();
             var val_city = this.validate_city();
             var val_zip = this.validate_zip();
             var val_street = this.validate_street();
@@ -299,7 +294,6 @@ export default {
             val_name &&
             val_description &&
             val_people_req &&
-            val_profile_pic &&
             val_city &&
             val_zip &&
             val_street &&
@@ -324,7 +318,7 @@ export default {
                     exact_location: this.exact_location
                 }
                 // Send up to parent
-                if(!this.validate_form()){
+                if(this.validate_form()){
                     this.$emit('edit-projekt', editedProjekt);
                     window.location = '/#/myprojekty';
                     //this.$router.push({ name: "/myprojekty"})
