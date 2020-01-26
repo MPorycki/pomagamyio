@@ -10,12 +10,11 @@
 </template>
 
 <script>
-import uuid from "uuid";
+import axios from 'axios'
 export default {
     name: "komCreate",
     data(){
         return {
-                id: uuid.v4(),
                 userId: 0,
                 projectId: 0,
                 text: ""
@@ -28,18 +27,15 @@ export default {
     methods: {
         addKomentarz(){
             const newKomentarz = {
-                id: this.id,
-                userId: this.userId,
-                projectId: this.projectId,
+                user_id: this.userId,
+                project_id: this.projectId,
                 text: this.text,
-                upvotes: 0,
-                downvotes: 0,
-                created_at: this.get_date()
             }
             // Send up to parent
                 if(this.validate_form()){
-                    this.$emit('add-komentarz', newKomentarz);
-                    window.location = '/#/myprojekty';
+                    axios.post('http://127.0.0.1:5000/comments',
+                        newKomentarz)
+                    window.location = '/#/projekt?project_id='+ this.projectId;
                     //this.$router.push({ name: "/myprojekty"})
                 }
         },
@@ -79,16 +75,6 @@ export default {
                 } catch (err) {
                     return false;
                 }
-        },
-        get_date(){
-            var currentdate = new Date(); 
-            var datetime = currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-            return datetime
         }
     }
 }

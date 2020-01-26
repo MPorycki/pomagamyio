@@ -40,7 +40,7 @@ export default {
       for (projekt of this.data.projects){
         if (projekt.id == editedProjekt.id){
           projekt.title = editedProjekt.title
-          projekt.description = editedProjekt.description
+          projekt.Description = editedProjekt.Description
           projekt.people_req = editedProjekt.people_req
           projekt.city = editedProjekt.city
           projekt.zip_code = editedProjekt.zip_code
@@ -127,57 +127,6 @@ export default {
   data() {
     return {
       data: {
-        reloader: 0,
-        projects: [
-            {
-                    id: 1,
-                    title: "Ciekawa Inicjatywa 1",
-                    description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-                    logo: "../img/traj2.gif",
-                    people_req: 12,
-                    city: "Warszawa",
-                    zip_code: "05-822",
-                    street: "Krucza",
-                    building_no: 7,
-                    flat_no: 2,
-                    upvotes: 4,
-                    downvotes: 3,
-                    exact_location: true,
-                    ownerId: 1
-                },
-                {
-                    id: 2,
-                    title: "Ciekawa Inicjatywa 2",
-                    description: "Lorem ipsum2",
-                    logo: "~assets/img/traj2.gif",
-                    people_req: 12,
-                    city: "Warszawa",
-                    zip_code: "05-822",
-                    street: "Krucza",
-                    building_no: 7,
-                    flat_no: 2,
-                    upvotes: 13,
-                    downvotes: 37,
-                    exact_location: true,
-                    ownerId: 2
-                },
-                {
-                    id: 3,
-                    title: "Ciekawa Inicjatywa 3",
-                    description: "Lorem ipsum3",
-                    logo: "../img/traj2.gif",
-                    people_req: 12,
-                    city: "Warszawa",
-                    zip_code: "05-822",
-                    street: "Krucza",
-                    building_no: 7,
-                    flat_no: 2,
-                    upvotes: 21,
-                    downvotes: 37,
-                    exact_location: true,
-                    ownerId: 3
-                }
-        ],
         users: [
 
         ],

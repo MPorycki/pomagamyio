@@ -43,12 +43,12 @@ const routes = [
   },
   {
     path: '/stworzprojekt',
-    name: 'projekt',
+    name: 'projektcreate',
     component: ProjektCreate
   },
   {
     path: '/edytujprojekt',
-    name: 'projekt',
+    name: 'projektedit',
     component: ProjektEdit
   },
   {

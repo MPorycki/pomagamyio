@@ -1,12 +1,13 @@
 <template>
-    <div class="truebody" v-on:add-projekt="addProjekt">
+    <div class="truebody">
         <router-link to="/stworzprojekt" class="stworzProjekt"></router-link>
-        <cProjekty v-on:upvote-projekt="upvoteProjekt" v-on:downvote-projekt="downvoteProjekt"  v-bind:projekty="data.projects"/>
+        <cProjekty v-on:upvote-projekt="upvoteProjekt" v-on:downvote-projekt="downvoteProjekt"  v-bind:projekty="this.projects"/>
     </div>
 </template>
 
 <script>
 import cProjekty from "../components/cProjekty.vue"
+import axios from 'axios'
 export default {
     name: "Projekty",
     components: {
@@ -21,6 +22,15 @@ export default {
             this.$emit('downvote-projekt', projekt_id);
         }
     },
+    data(){
+        return {
+            projects: []
+        }
+    },
+    mounted() {
+        axios.get("http://127.0.0.1:5000/projects")
+        .then(res => this.projects = res.data["Projects"])
+    }
 }
 </script>
 

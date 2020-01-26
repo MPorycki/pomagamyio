@@ -3,7 +3,7 @@
     <div class="basic_project_data">
         <h4>Opis Projektu</h4>
         <div class="text_box">
-            <h6>{{ProjektData.description}}</h6>
+            <h6>{{ProjektData.Description}}</h6>
         </div>
         <div class="project_image">
             <img src="../assets/img/traj2.gif" alt="">
@@ -49,7 +49,7 @@
             <!--TODO wyswietlanie mozliwosci edycji-->
             <div class="comments_header">
                 <h2>Dyskusja</h2>
-                <router-link :to="{path: '/skomentuj', query: {project_id: ProjektData.id, user_id: 1}}" tag="button">Skomentuj</router-link>
+                <router-link :to="{path: '/skomentuj', query: {project_id: ProjektData.id, user_id: '0a99e58c3aba4cf89a36000ae5c7af02'}}" tag="button">Skomentuj</router-link>
             </div>
             <table> 
                 <colgroup>
@@ -66,7 +66,7 @@
                 </tr>
                 <tr v-bind:key="comment.id" v-for="comment in CommentsProjekt">
                     <th>{{comment.created_at}}</th>
-                    <th>{{find_username(comment.userId)}}</th>
+                    <th>{{find_username(comment.id_owner)}}</th>
                     <th>{{comment.text}}
                         <router-link :to="{path: 'edytujKomentarz', query: {comment_id: comment.id}}" ><img src="../assets/img/edit.png"  style="width:15px; height: 15px;" alt=""></router-link>
                         <img src="../assets/img/trash.png"  style="width:15px; height: 15px;" alt="" v-on:click="delete_comment(comment.id)">
@@ -86,6 +86,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "ProjektItem",
     props: {
@@ -98,9 +99,8 @@ export default {
             return this.UsersProjekt.filter(user => user.id == userId)[0].username;
         },
         delete_comment(comment_id) {
-                this.$emit('delete-komentarz', comment_id);
+                axios.delete("http://127.0.0.1:5000/comments/" + comment_id)
                 alert("Komentarz usuniety");
-                this.key +=1;
             },
         build_adress(){
             var flat_number = "";

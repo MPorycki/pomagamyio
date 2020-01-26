@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import uuid from "uuid";
+import axios from 'axios';
 export default {
     name:"projektCreate",
     data(){
@@ -295,24 +295,24 @@ export default {
         },
         addProjekt() {
                 const newProjekt = {
-                    id: uuid.v4(),
-                    title: this.title,
+                    name: this.title,
                     description: this.description,
-                    people_req: this.people_req,
+                    requested_participants: this.people_req,
+                    adress: {
                     city: this.city,
                     zip_code: this.zip_code,
                     street: this.street,
                     building_no: this.building_no,
                     flat_no: this.flat_no,
-                    upvotes: 0,
-                    downvotes: 0,
-                    exact_location: this.exact_location,
-                    ownerId: 1 //Hardcode, do zmiany potem
+                    exact_location: this.exact_location
+                    },
+                    owner_id: "0a99e58c3aba4cf89a36000ae5c7af02" //Hardcode, do zmiany potem
                 }
-                // Send up to parent
+                // Send up to API
                 if(this.validate_form()){
-                    this.$emit('add-projekt', newProjekt);
-                    window.location = '/#/myprojekty';
+                    axios.post("http://127.0.0.1:5000/projects",
+                        newProjekt)
+                    //window.location = '/#/myprojekty';
                     //this.$router.push({ name: "/myprojekty"})
                 }
         },

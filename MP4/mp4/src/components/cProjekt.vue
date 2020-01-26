@@ -1,7 +1,7 @@
 <template>
         <div class="cprojekt">
-            <router-link :to="{path: '/projekt', query: {project_id: projekt.id}}"><h4>{{projekt.title}}</h4></router-link>
-            <h6>{{shorten_desc(projekt.description)}}</h6>
+            <router-link :to="{path: '/projekt', query: {project_id: projekt.id}}"><h4>{{projekt.name}}</h4></router-link>
+            <h6>{{shorten_desc(projekt.Description)}}</h6>
             <div class="votes">
                 <div class="upvotes" grid-column:1 style="display:flex; background-color: lightgreen">
                     <img src="../assets/img/upvote.png" v-on:click="emitUpvote(projekt.id)"  alt="Oceń projekt pozytywnie">
@@ -26,11 +26,11 @@ export default {
         emitDownvote(projekt_id){
             this.$emit('downvote-projekt', projekt_id);
         },
-        shorten_desc(description){
-            if (description.length > 200) {
-                return description.substring(0, 200) + "..."
+        shorten_desc(Description){
+            if (Description.length > 200) {
+                return Description.substring(0, 200) + "..."
             } else {
-                return description;
+                return Description;
             }
         }
     }
