@@ -33,7 +33,7 @@ export default {
             }
             // Send up to parent
                 if(this.validate_form()){
-                    axios.post('http://127.0.0.1:5000/comments',
+                    axios.post('https://s15307pomagamy.herokuapp.com/comments',
                         newKomentarz)
                     window.location = '/#/projekt?project_id='+ this.projectId;
                     //this.$router.push({ name: "/myprojekty"})

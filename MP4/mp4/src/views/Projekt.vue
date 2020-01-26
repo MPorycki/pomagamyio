@@ -26,7 +26,7 @@ export default {
                 this.projektComments = this.data.comments.filter(komentarz => komentarz.projectId == projekt_id);
             },
             delete_projekt() {
-                axios.delete("http://127.0.0.1:5000/projects/" + this.$route.query.project_id )
+                axios.delete("https://s15307pomagamy.herokuapp.com/projects/" + this.$route.query.project_id )
                 alert("Projekt usuniety");
                 window.location = '/#/myprojekty';
             },
@@ -42,8 +42,8 @@ export default {
         }
         },
         mounted(){
-            axios.get("http://127.0.0.1:5000/projects/" + this.$route.query.project_id ).then(res => this.projekt = res.data)
-            axios.get("http://127.0.0.1:5000/comments/" + this.$route.query.project_id).then(res => this.projektComments = res.data["comments"])
+            axios.get("https://s15307pomagamy.herokuapp.com/projects/" + this.$route.query.project_id ).then(res => this.projekt = res.data)
+            axios.get("https://s15307pomagamy.herokuapp.com/comments/" + this.$route.query.project_id).then(res => this.projektComments = res.data["comments"])
         },
     data() {
         return {

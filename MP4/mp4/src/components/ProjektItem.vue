@@ -99,7 +99,7 @@ export default {
             return this.UsersProjekt.filter(user => user.id == userId)[0].username;
         },
         delete_comment(comment_id) {
-                axios.delete("http://127.0.0.1:5000/comments/" + comment_id)
+                axios.delete("https://s15307pomagamy.herokuapp.com/comments/" + comment_id)
                 alert("Komentarz usuniety");
             },
         build_adress(){

@@ -310,7 +310,7 @@ export default {
                 }
                 // Send up to API
                 if(this.validate_form()){
-                    axios.post("http://127.0.0.1:5000/projects",
+                    axios.post("https://s15307pomagamy.herokuapp.com/projects",
                         newProjekt)
                     //window.location = '/#/myprojekty';
                     //this.$router.push({ name: "/myprojekty"})
