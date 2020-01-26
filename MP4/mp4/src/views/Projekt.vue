@@ -1,7 +1,6 @@
 <template>
     <div class="truebody">
         <div style="margin-top:30px;">
-            <p> elo {{this.projektComments}}</p>
             <router-link :to="{path: '/edytujprojekt', query: {project_id:this.projekt.id}}" tag="button" style="margin-right: 10px">Edytuj projekt</router-link>
             <button v-on:click="delete_projekt">Usuń projekt</button>
         </div>
