@@ -13,7 +13,7 @@
         <h4>Lokalizacja</h4>
         <div class="text_box" style="display:inline">
             <h2>{{build_adress()}}</h2><br>
-            <h2>"Dokładna lokalizacja: " {{this.ProjektData.exact_location}}</h2>
+            <h2>Dokładna lokalizacja:  {{render_exact_location(this.ProjektData.exact_location)}}</h2>
         </div>
         <div class="votes">
             <div class="upvotes" grid-column:1 style="display:flex; background-color: lightgreen">
@@ -37,7 +37,7 @@
                     <th>Uzytkownik</th>
                     <th>Rola</th>
                 </tr>
-                <tr v-bind:key="user.id" v-for="user in UsersProjekt">
+                <tr v-bind:key="user.id_participant" v-for="user in UsersProjekt">
                     <th >{{user.username}}</th>
                     <th>{{user.role}}</th>
                 </tr>
@@ -46,7 +46,6 @@
     </div>
 
         <div class="comments">
-            <!--TODO wyswietlanie mozliwosci edycji-->
             <div class="comments_header">
                 <h2>Dyskusja</h2>
                 <router-link :to="{path: '/skomentuj', query: {project_id: ProjektData.id, user_id: '0a99e58c3aba4cf89a36000ae5c7af02'}}" tag="button">Skomentuj</router-link>
@@ -68,7 +67,7 @@
                     <th>{{comment.created_at}}</th>
                     <th>{{find_username(comment.id_owner)}}</th>
                     <th>{{comment.text}}
-                        <router-link :to="{path: 'edytujKomentarz', query: {comment_id: comment.id}}" ><img src="../assets/img/edit.png"  style="width:15px; height: 15px;" alt=""></router-link>
+                        <router-link :to="{path: 'edytujKomentarz',  query: {comment_id: comment.id}, params: {data: comment}}" ><img src="../assets/img/edit.png"  style="width:15px; height: 15px;" alt=""></router-link>
                         <img src="../assets/img/trash.png"  style="width:15px; height: 15px;" alt="" v-on:click="delete_comment(comment.id)">
                     </th>
                     <th>
@@ -96,11 +95,12 @@ export default {
     },
     methods: {
         find_username(userId){
-            return this.UsersProjekt.filter(user => user.id == userId)[0].username;
+            return this.UsersProjekt.filter(user => user.id_participant == userId)[0].username;
         },
         delete_comment(comment_id) {
                 axios.delete("https://s15307pomagamy.herokuapp.com/comments/" + comment_id)
                 alert("Komentarz usuniety");
+                this.CommentsProjekt = this.CommentsProjekt.filter(comment => comment.id != comment_id)
             },
         build_adress(){
             var flat_number = "";
@@ -108,6 +108,13 @@ export default {
                 flat_number = "/" + this.ProjektData.flat_no;
             }
             return (this.ProjektData.street + " " + this.ProjektData.building_no + flat_number+  ", " + this.ProjektData.zip_code + " " + this.ProjektData.city )
+        },
+        render_exact_location(location_bool){
+            if (location_bool){
+                return "Tak"
+            } else {
+                return "Nie"
+            }
         },
         emitUpvote(komentarz_id){
             this.$emit('upvote-komentarz', komentarz_id);

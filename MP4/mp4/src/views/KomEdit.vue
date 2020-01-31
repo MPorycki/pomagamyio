@@ -10,37 +10,34 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "komCreate",
     data(){
         return {
                 id: 0,
-                userId: 0,
-                projectId: 0,
-                text: ""
+                text: "",
+                project_id: 0
         }
     },
     props: {data: Object},
     mounted(){
         this.id = this.$route.query.comment_id;
-        this.load_komentarz(this.id);
+        axios.get("http://127.0.0.1:5000/comment/" + this.id).then( res => this.load_komentarz(res.data));
     },
     methods: {
-        load_komentarz(comment_id){
-            var komentarz = this.data.comments.filter(komentarz => komentarz.id == comment_id)[0];
-            this.text = komentarz.text;
+        load_komentarz(input_data){
+            this.text = input_data["comment"]["text"]
+            this.project_id = input_data["comment"]["id_project"]
         },
         editKomentarz(){
             const editedKomentarz = {
                 id: this.id,
-                text: this.text,
-                created_at: this.get_date()
+                text: this.text
             }
             // Send up to parent
                 if(this.validate_form()){
-                    this.$emit('edit-komentarz', editedKomentarz);
-                    window.location = '/#/myprojekty';
-                    //this.$router.push({ name: "/myprojekty"})
+                    axios.patch("http://127.0.0.1:5000/comments", editedKomentarz).then(this.$router.push({ name: 'projekt', query:{project_id: this.project_id}}))
                 }
         },
         add_error_text(element_name, text){

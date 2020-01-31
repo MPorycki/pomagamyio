@@ -42,6 +42,7 @@ export default {
         },
         mounted(){
             axios.get("https://s15307pomagamy.herokuapp.com/projects/" + this.$route.query.project_id ).then(res => this.projekt = res.data)
+            axios.get("https://s15307pomagamy.herokuapp.com/participants/" + this.$route.query.project_id).then(res => this.projektUsers = res.data["participants"])
             axios.get("https://s15307pomagamy.herokuapp.com/comments/" + this.$route.query.project_id).then(res => this.projektComments = res.data["comments"])
         },
     data() {
@@ -50,21 +51,7 @@ export default {
 
                 },
             projektUsers: [
-                {
-                id: '0a99e58c3aba4cf89a36000ae5c7af02',
-                username: "JKowalski92",
-                role: "Twórca"
-                },
-                {
-                id: 2,
-                username: "KNowak12",
-                role: "Grafik"
-                },
-                {
-                id: 3,
-                username: "Zjanczak",
-                role: "Stolarz"
-                }
+                
                 ],
             projektComments: [
                 

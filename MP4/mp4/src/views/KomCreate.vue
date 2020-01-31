@@ -34,9 +34,9 @@ export default {
             // Send up to parent
                 if(this.validate_form()){
                     axios.post('https://s15307pomagamy.herokuapp.com/comments',
-                        newKomentarz)
-                    window.location = '/#/projekt?project_id='+ this.projectId;
-                    //this.$router.push({ name: "/myprojekty"})
+                        newKomentarz).then(
+                    this.$router.push({ name: 'projekt', query:{project_id: this.projectId}})
+                        )
                 }
         },
         add_error_text(element_name, text){

@@ -14,10 +14,6 @@
                 <input type="text" id="3" v-model="people_req" name="people_req" value=3> 
                 <label class="lebel" id="people_req_error"></label> <br>
 
-                <label class="namelebel" for="4">Zdjęcie "profilowe"</label>
-                <input type="file" id="4" name="profile_pic" onchange="check_img_width_profile(this);">
-                <label class="lebel" id="profile_pic_error"></label> <br>
-
                 <h4>Lokalizacja</h4>
 
                 <label class="namelebel" for="6">Miasto</label>
@@ -52,8 +48,9 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-    name:"projektCreate",
+    name:"projektEdit",
     props: {data: Object},
     data(){
         return {
@@ -67,22 +64,25 @@ export default {
             building_no: "",
             flat_no: 0,
             exact_location: true,
-            profile_pic_size_check: true
+            profile_pic_size_check: true,
+            input_data:0
         }
     },
     methods: {
         load_project(projekt_id){
-            var projekt = this.data.projects.filter(projekt => projekt.id == projekt_id)[0];
-            this.id = projekt.id;
-            this.title = projekt.title
-            this.description = projekt.description;
-            this.people_req = projekt.people_req;
-            this.city = projekt.city;
-            this.zip_code = projekt.zip_code;
-            this.street = projekt.street;
-            this.building_no = projekt.building_no;
-            this.flat_no = projekt.flat_no;
-            this.exact_location = projekt.exact_location;
+            axios.get("http://127.0.0.1:5000/projects/"+projekt_id).then(res => this.load_data(res.data))
+        },
+        load_data(input_data){
+            this.id = input_data["id"];
+            this.title = input_data["name"]
+            this.description = input_data["Description"];
+            this.people_req = input_data["requested_participants"];
+            this.city = input_data["city"];
+            this.zip_code = input_data["zip_code"];
+            this.street = input_data["street"];
+            this.building_no = input_data["building_no"];
+            this.flat_no = input_data["flat_no"];
+            this.exact_location = input_data["exact_location"];
         },
         add_error_text(element_name, text){
             var form = document.getElementById(element_name);
@@ -149,45 +149,6 @@ export default {
             ppl_req_obj.style.borderColor = "grey";
             this.add_error_text("people_req_error", "");
             return true;
-        },
-        validate_profile_pic(){
-            var profile_pic_obj = document.forms["register"]["profile_pic"];
-            var profile_pic = profile_pic_obj.files;
-            var name_regex_png = /.*\.png/
-            var name_regex_jpg = /.*\.jpg/
-            if (profile_pic.length == 0){
-                profile_pic_obj.style.borderColor = "red";
-                this.add_error_text("profile_pic_error", "Zdjecie profilowe jest wymagane");
-                return false;
-            }
-            else if (!(name_regex_jpg.test(profile_pic[0].name) || name_regex_png.test(profile_pic[0].name))){
-                profile_pic_obj.style.borderColor = "red";
-                this.add_error_text("profile_pic_error", "Zdjecie musi byc w formacie .png lub .jpg");
-                return false;
-            }
-            if (document.getElementById("profile_pic_error").textContent.length != 0){
-                return false;
-            }
-            return true;
-        },
-        check_img_width_profile(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                var img = new Image;
-                    
-                img.onload = function() {
-                    if (img.width > img.height){
-                        this.add_error_text("profile_pic_error", "Zdjecie musi miec wieksza wysokosc niz szerokosc");
-                    } else {
-                        this.add_error_text("profile_pic_error", "");
-                    }
-                };
-                
-                img.src = reader.result;
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
         },
         validate_city(){
             var city_obj = document.forms["register"]["city"];
@@ -307,20 +268,22 @@ export default {
         editProjekt() {
                 const editedProjekt = {
                     id: this.id,
-                    title: this.title,
+                    name: this.title,
                     description: this.description,
-                    people_req: this.people_req,
-                    city: this.city,
-                    zip_code: this.zip_code,
-                    street: this.street,
-                    building_no: this.building_no,
-                    flat_no: this.flat_no,
-                    exact_location: this.exact_location
+                    requested_participants: this.people_req,
+                    adress: {
+                        city: this.city,
+                        zip_code: this.zip_code,
+                        street: this.street,
+                        building_no: this.building_no,
+                        flat_no: this.flat_no,
+                        exact_location: this.exact_location
+                    }
                 }
                 // Send up to parent
                 if(this.validate_form()){
-                    this.$emit('edit-projekt', editedProjekt);
-                    window.location = '/#/myprojekty';
+                    axios.patch("https://s15307pomagamy.herokuapp.com/projects", editedProjekt)
+                    window.location = '/#/projekt?project_id='+this.id;
                     //this.$router.push({ name: "/myprojekty"})
                 }
         },
