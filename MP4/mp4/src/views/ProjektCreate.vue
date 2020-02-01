@@ -14,10 +14,6 @@
                 <input type="text" id="3" v-model="people_req" name="people_req"> 
                 <label class="lebel" id="people_req_error"></label> <br>
 
-                <label class="namelebel" for="4">Zdjęcie "profilowe"</label>
-                <input type="file" id="4" name="profile_pic" @change="this.check_img_width_profile">
-                <label class="lebel" id="profile_pic_error"></label> <br>
-
                 <h4>Lokalizacja</h4>
 
                 <label class="namelebel" for="6">Miasto</label>
@@ -42,8 +38,8 @@
 
                 <h4>Czy jest to dokładna lokalizacja projektu czy punkt zbiórki</h4>
                 <div class="radio">
-                    <input type="radio" name="location" v-model="exact_location" value="true"> Dokładna lokalizacja
-                    <input type="radio" name="location" v-model="exact_location" value="false" checked> Punkt zbiórki
+                    <input type="radio" name="location" v-model="exact_location" value=1> Dokładna lokalizacja
+                    <input type="radio" name="location" v-model="exact_location" value=0 checked> Punkt zbiórki
                 </div>
                 <input type="submit" value="Zgłoś projekt">
             </form>
@@ -136,45 +132,6 @@ export default {
             ppl_req_obj.style.borderColor = "grey";
             this.add_error_text("people_req_error", "");
             return true;
-        },
-        validate_profile_pic(){
-            var profile_pic_obj = document.forms["register"]["profile_pic"];
-            var profile_pic = profile_pic_obj.files;
-            var name_regex_png = /.*\.png/
-            var name_regex_jpg = /.*\.jpg/
-            if (profile_pic.length == 0){
-                profile_pic_obj.style.borderColor = "red";
-                this.add_error_text("profile_pic_error", "Zdjecie profilowe jest wymagane");
-                return false;
-            }
-            else if (!(name_regex_jpg.test(profile_pic[0].name) || name_regex_png.test(profile_pic[0].name))){
-                profile_pic_obj.style.borderColor = "red";
-                this.add_error_text("profile_pic_error", "Zdjecie musi byc w formacie .png lub .jpg");
-                return false;
-            }
-            if (document.getElementById("profile_pic_error").textContent.length != 0){
-                return false;
-            }
-            return true;
-        },
-        check_img_width_profile(input) {
-            if (input.target.files && input.target.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                    var img = new Image;
-                        
-                    img.onload = function() {
-                        if (img.width > img.height){
-                            document.getElementById("profile_pic_error").textContent = "Zdjecie musi miec wieksza wysokosc niz szerokosc"
-                        } else {
-                            document.getElementById("profile_pic_error").textContent = ""
-                        }
-                    };
-                    
-                    img.src = reader.result;
-                };
-                reader.readAsDataURL(input.target.files[0]);
-            }
         },
         validate_city(){
             var city_obj = document.forms["register"]["city"];
@@ -272,7 +229,6 @@ export default {
             var val_name = this.validate_name();
             var val_description = this.validate_description();
             var val_people_req = this.validate_people_req();
-            var val_profile_pic = this.validate_profile_pic();
             var val_city = this.validate_city();
             var val_zip = this.validate_zip();
             var val_street = this.validate_street();
@@ -282,7 +238,6 @@ export default {
             val_name &&
             val_description &&
             val_people_req &&
-            val_profile_pic &&
             val_city &&
             val_zip &&
             val_street &&
@@ -311,9 +266,10 @@ export default {
                 // Send up to API
                 if(this.validate_form()){
                     axios.post("https://s15307pomagamy.herokuapp.com/projects",
-                        newProjekt)
-                    //window.location = '/#/myprojekty';
-                    //this.$router.push({ name: "/myprojekty"})
+                        newProjekt).then(function(){
+                            alert("Projekt stworzony pomyślnie");
+                            window.location = '/#/projekty';
+                        })
                 }
         },
          

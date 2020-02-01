@@ -4,9 +4,8 @@
         <ul>
             <li><router-link to="/" >Strona główna</router-link></li>
             <li><router-link to="/projekty" >Projekty</router-link></li>
-            <li><router-link to="/myprojekty" >Moje Projekty</router-link></li>
             <li><router-link to="/ranking" >Ranking Serc</router-link></li>
-            <li style="float:right"><router-link to="/login" >Logowanie/Rejestracja</router-link></li>
+            <li style="float:right"><router-link to="/logowanie" >Logowanie/Rejestracja</router-link></li>
         </ul>
     </div>
 </template>

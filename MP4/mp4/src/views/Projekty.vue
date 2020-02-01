@@ -1,6 +1,6 @@
 <template>
     <div class="truebody">
-        <router-link to="/stworzprojekt" class="stworzProjekt"></router-link>
+        <router-link to="/stworzprojekt" class="stworzProjekt">Stwórz projekt</router-link>
         <cProjekty v-on:upvote-projekt="upvoteProjekt" v-on:downvote-projekt="downvoteProjekt"  v-bind:projekty="this.projects"/>
     </div>
 </template>

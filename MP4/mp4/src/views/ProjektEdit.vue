@@ -70,7 +70,7 @@ export default {
     },
     methods: {
         load_project(projekt_id){
-            axios.get("http://127.0.0.1:5000/projects/"+projekt_id).then(res => this.load_data(res.data))
+            axios.get("https://s15307pomagamy.herokuapp.com/projects/"+projekt_id).then(res => this.load_data(res.data))
         },
         load_data(input_data){
             this.id = input_data["id"];

@@ -9,6 +9,10 @@ import ProjektCreate from '../views/ProjektCreate.vue'
 import ProjektEdit from '../views/ProjektEdit.vue'
 import KomCreate from '../views/KomCreate.vue'
 import KomEdit from '../views/KomEdit.vue'
+import ParticipantAdd from '../views/ParticipantAdd.vue'
+import ParticipantEdit from '../views/ParticipantEdit.vue'
+import Logowanie from '../views/Logowanie.vue'
+import Rejestracja from '../views/Rejestracja.vue'
 
 Vue.use(VueRouter)
 
@@ -60,7 +64,28 @@ const routes = [
     path: '/edytujKomentarz',
     name: 'edytujKomentarz',
     component: KomEdit
+  },
+  {
+    path: '/participantAdd',
+    name: 'participantAdd',
+    component: ParticipantAdd
+  },
+  {
+    path: '/participantEdit',
+    name: 'participantEdit',
+    component: ParticipantEdit
+  },
+  {
+    path: '/logowanie',
+    name: 'logowanie',
+    component: Logowanie
+  },
+  {
+    path: '/rejestracja',
+    name: 'rejestacja',
+    component: Rejestracja
   }
+
 ]
 
 const router = new VueRouter({

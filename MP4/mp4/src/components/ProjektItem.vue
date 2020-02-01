@@ -5,8 +5,9 @@
         <div class="text_box">
             <h6>{{ProjektData.Description}}</h6>
         </div>
-        <div class="project_image">
-            <img src="../assets/img/traj2.gif" alt="">
+        <div class="req_participants">
+            <h3>Potrzebna liczba uczestników:</h3>
+            <h2>{{ProjektData.requested_participants}}</h2>
         </div>
     </div>
     <div class="address_and_likes">
@@ -29,7 +30,7 @@
     <div class="signin_users">
         <div class="signup_button">
             <!--TODO dodać wyświetlanie czy obecny user sie jeszcze moze zapisac czy juz jest-->
-            <button onclick="location.href='zapis.html';" name="Zapisz_się" id="1">Zapisz sie </button>
+            <router-link :to="{path: '/participantAdd', query: {project_id: ProjektData.id, user_id: '0a99e58c3aba4cf89a36000ae5c7af02'}}" tag="button">Zapisz się</router-link>
         </div>
         <div class="user_table">
             <table>
@@ -38,8 +39,12 @@
                     <th>Rola</th>
                 </tr>
                 <tr v-bind:key="user.id_participant" v-for="user in UsersProjekt">
-                    <th >{{user.username}}</th>
-                    <th>{{user.role}}</th>
+                    <th >{{user.username}}
+                        <img src="../assets/img/trash.png"  style="width:15px; height: 15px;" alt="" v-on:click="delete_participant(user.id)">
+                    </th>
+                    <th>{{user.role}}
+                        <router-link :to="{path: '/participantEdit',  query: {project_id: ProjektData.id, participant_id: user.id}}" ><img src="../assets/img/edit.png"  style="width:15px; height: 15px;" alt=""></router-link>
+                    </th>
                 </tr>
             </table>
         </div>
@@ -102,6 +107,11 @@ export default {
                 alert("Komentarz usuniety");
                 this.CommentsProjekt = this.CommentsProjekt.filter(comment => comment.id != comment_id)
             },
+        delete_participant(participant_id){
+            axios.delete("https://s15307pomagamy.herokuapp.com/participants/"+participant_id)
+            alert("Uzytkownik usuniety z projektu")
+            this.UsersProjekt = this.UsersProjekt.filter(user => user.id != participant_id)
+        },
         build_adress(){
             var flat_number = "";
             if (this.ProjektData.flat_no != 0){
@@ -158,16 +168,12 @@ export default {
     align-items: center;
 }
 
-.project_image {
+.req_participants {
     grid-column: 3;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.project_image img{
-    width: 300px;
-    height: 200px;
 }
 
 .address_and_likes {

@@ -23,7 +23,7 @@ export default {
     props: {data: Object},
     mounted(){
         this.id = this.$route.query.comment_id;
-        axios.get("http://127.0.0.1:5000/comment/" + this.id).then( res => this.load_komentarz(res.data));
+        axios.get("https://s15307pomagamy.herokuapp.com/comment/" + this.id).then( res => this.load_komentarz(res.data));
     },
     methods: {
         load_komentarz(input_data){
@@ -37,7 +37,7 @@ export default {
             }
             // Send up to parent
                 if(this.validate_form()){
-                    axios.patch("http://127.0.0.1:5000/comments", editedKomentarz).then(this.$router.push({ name: 'projekt', query:{project_id: this.project_id}}))
+                    axios.patch("https://s15307pomagamy.herokuapp.com/comments", editedKomentarz).then(this.$router.push({ name: 'projekt', query:{project_id: this.project_id}}))
                 }
         },
         add_error_text(element_name, text){

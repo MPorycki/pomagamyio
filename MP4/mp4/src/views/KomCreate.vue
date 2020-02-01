@@ -1,5 +1,5 @@
 <template>
-    <form id="kom_form" action="kom_dodany.html" @submit.prevent="addKomentarz" name="kom_form">
+    <form id="kom_form" @submit.prevent="addKomentarz" name="kom_form">
         <div class="kombody">
                 <h1>Dodaj swój komentarz</h1>
                 <textarea form="kom_form" id="komentarz" v-model="text" name="komentarz"></textarea>
@@ -34,8 +34,9 @@ export default {
             // Send up to parent
                 if(this.validate_form()){
                     axios.post('https://s15307pomagamy.herokuapp.com/comments',
-                        newKomentarz).then(
-                    this.$router.push({ name: 'projekt', query:{project_id: this.projectId}})
+                        newKomentarz).then(function(response){
+                            window.location = '/#/projekt?project_id='+response.data["project_id"]
+                        }
                         )
                 }
         },
