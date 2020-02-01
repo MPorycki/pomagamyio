@@ -41,7 +41,7 @@ export default {
         mounted(){
             axios.get("https://s15307pomagamy.herokuapp.com/projects/" + this.$route.query.project_id ).then(res => this.projekt = res.data)
             axios.get("https://s15307pomagamy.herokuapp.com/participants/" + this.$route.query.project_id).then(res => this.projektUsers = res.data["participants"])
-            axios.get("https://s15307pomagamy.herokuapp.com/comments/" + this.$route.query.project_id).then(res => this.projektComments = res.data["comments"])
+            axios.get("http://127.0.0.1:5000/comments/" + this.$route.query.project_id).then(res => this.projektComments = res.data["comments"])
         },
     data() {
         return {

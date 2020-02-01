@@ -70,16 +70,16 @@
                 </tr>
                 <tr v-bind:key="comment.id" v-for="comment in CommentsProjekt">
                     <th>{{comment.created_at}}</th>
-                    <th>{{find_username(comment.id_owner)}}</th>
+                    <th>{{comment.login}}</th>
                     <th>{{comment.text}}
                         <router-link :to="{path: 'edytujKomentarz',  query: {comment_id: comment.id}, params: {data: comment}}" ><img src="../assets/img/edit.png"  style="width:15px; height: 15px;" alt=""></router-link>
                         <img src="../assets/img/trash.png"  style="width:15px; height: 15px;" alt="" v-on:click="delete_comment(comment.id)">
                     </th>
                     <th>
                        <div class="up_downvote">
-                            <img src="../assets/img/upvote.png" class="upvote_img" style="margin-right: 5px" v-on:click="emitUpvote(comment.id)">
+                            <img src="../assets/img/upvote.png" class="upvote_img" style="margin-right: 5px" v-on:click="vote(1, comment.id)">
                             <p class="upvote_no">{{comment.upvotes}}</p>
-                            <img src="../assets/img/downvote.png" class="downvote_img" v-on:click="emitDownvote(comment.id)">
+                            <img src="../assets/img/downvote.png" class="downvote_img" v-on:click="vote(0, comment.id)">
                             <p class="downvote_no">{{comment.downvotes}}</p>
                         </div>
                     </th>
@@ -99,13 +99,10 @@ export default {
         CommentsProjekt: Array
     },
     methods: {
-        find_username(userId){
-            return this.UsersProjekt.filter(user => user.id_participant == userId)[0].username;
-        },
         delete_comment(comment_id) {
-                axios.delete("https://s15307pomagamy.herokuapp.com/comments/" + comment_id)
-                alert("Komentarz usuniety");
-                this.CommentsProjekt = this.CommentsProjekt.filter(comment => comment.id != comment_id)
+            axios.delete("https://s15307pomagamy.herokuapp.com/comments/" + comment_id)
+            alert("Komentarz usuniety");
+            this.CommentsProjekt = this.CommentsProjekt.filter(comment => comment.id != comment_id)
             },
         delete_participant(participant_id){
             axios.delete("https://s15307pomagamy.herokuapp.com/participants/"+participant_id)
@@ -125,12 +122,24 @@ export default {
             } else {
                 return "Nie"
             }
+        },vote(is_upvote, comment_id){
+            var data = {
+                user_id: this.ProjektData.id_owner,
+                type: "comment",
+                object_id: comment_id,
+                is_upvote: is_upvote
+            };
+            axios.post("https://s15307pomagamy.herokuapp.com/votes/", data).then(res => this.vote_fe(res.status, is_upvote, comment_id))
+            .catch(error => alert(error.response.data));
         },
-        emitUpvote(komentarz_id){
-            this.$emit('upvote-komentarz', komentarz_id);
-        },
-        emitDownvote(komentarz_id){
-            this.$emit('downvote-komentarz', komentarz_id);
+        vote_fe(status, is_upvote, comment_id){
+            if (status == 200){
+                if (is_upvote){
+                    this.CommentsProjekt.filter(comment => comment.id == comment_id)[0].upvotes += 1
+                } else {
+                    this.CommentsProjekt.filter(comment => comment.id == comment_id)[0].downvotes += 1;
+                }
+            }
         }
     }
 }

@@ -38,8 +38,8 @@
 
                 <h4>Czy jest to dokładna lokalizacja projektu czy punkt zbiórki</h4>
                 <div class="radio">
-                    <input type="radio" name="location" v-model="exact_location" value="true"> Dokładna lokalizacja
-                    <input type="radio" name="location" v-model="exact_location" value="false" checked> Punkt zbiórki
+                    <input type="radio" name="location" v-model="exact_location" value=1> Dokładna lokalizacja
+                    <input type="radio" name="location" v-model="exact_location" value=0 checked> Punkt zbiórki
                 </div>
                 <input type="submit" value="Zgłoś projekt">
             </form>
@@ -63,7 +63,7 @@ export default {
             street: "",
             building_no: "",
             flat_no: 0,
-            exact_location: true,
+            exact_location: 1,
             profile_pic_size_check: true,
             input_data:0
         }
@@ -282,9 +282,10 @@ export default {
                 }
                 // Send up to parent
                 if(this.validate_form()){
-                    axios.patch("https://s15307pomagamy.herokuapp.com/projects", editedProjekt)
-                    window.location = '/#/projekt?project_id='+this.id;
-                    //this.$router.push({ name: "/myprojekty"})
+                    axios.patch("https://s15307pomagamy.herokuapp.com/projects", editedProjekt).then(
+                        function(response){
+                            window.location = '/#/projekt?project_id='+response.data;
+                        })
                 }
         },
          

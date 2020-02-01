@@ -37,7 +37,9 @@ export default {
             }
             // Send up to parent
                 if(this.validate_form()){
-                    axios.patch("https://s15307pomagamy.herokuapp.com/comments", editedKomentarz).then(this.$router.push({ name: 'projekt', query:{project_id: this.project_id}}))
+                    axios.patch("https://s15307pomagamy.herokuapp.com/comments", editedKomentarz).then(function(response){
+                        window.location = '/#/projekt?project_id='+response.data;
+                    })
                 }
         },
         add_error_text(element_name, text){

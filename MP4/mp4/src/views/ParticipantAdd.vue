@@ -34,8 +34,11 @@ export default {
             }
             // Send up to parent
                 if(this.validate_form()){
-                    axios.post("https://s15307pomagamy.herokuapp.com/participants/", newParticipant).then(function(response){
+                    axios.post("http://127.0.0.1:5000/participants/", newParticipant).then(function(response){
                         window.location = '/#/projekt?project_id='+response.data["project_id"]
+                    }).catch(function(){
+                        alert("Masz juz role w tym projekcie");
+                        history.back();
                     })
                 }
         },
