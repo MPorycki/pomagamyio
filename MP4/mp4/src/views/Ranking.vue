@@ -7,25 +7,15 @@
                             <col span="1" style="width: 55%;">
                             <col span="1" style="width: 35%;">
                         </colgroup>
-                        <tr style="background-color: lightslategray">
+                        <tr style="background-color: lightslategray" >
                             <td>Miejsce</td>
                             <td>Uzytkownik</td>
-                            <td>Rola</td>
+                            <td>Liczba głosów</td>
                         </tr>
-                        <tr>
-                            <td>1.</td>
-                            <td>JKowalski92</td>
-                            <td>Twórca</td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>KNowak12</td>
-                            <td>Grafik</td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>ZJanczak</td>
-                            <td>Stolarz</td>
+                        <tr v-bind:key="project.id" v-for="project in this.projects">
+                            <td>{{project.position}}</td>
+                            <td>{{project.name}}</td>
+                            <td>{{project.upvotes}}</td>
                         </tr>
                 </table>
         
@@ -34,8 +24,20 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-   
+    data(){
+        return {
+        iterator: 0,
+        projects: {}
+        }
+    },
+   methods: {
+   },
+   mounted(){
+           axios.get("http://127.0.0.1:5000/ranking").then(response =>
+               this.projects = response.data["projects"])
+       }
 }
 </script>
 

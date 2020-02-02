@@ -53,7 +53,7 @@
         <div class="comments">
             <div class="comments_header">
                 <h2>Dyskusja</h2>
-                <router-link :to="{path: '/skomentuj', query: {project_id: ProjektData.id, user_id: '0a99e58c3aba4cf89a36000ae5c7af02'}}" tag="button">Skomentuj</router-link>
+                <router-link :to="{path: '/skomentuj', query: {project_id: ProjektData.id}}" tag="button">Skomentuj</router-link>
             </div>
             <table> 
                 <colgroup>
@@ -123,8 +123,12 @@ export default {
                 return "Nie"
             }
         },vote(is_upvote, comment_id){
+            if (this.get_user().length == 0){
+                alert("Zaloguj sie, aby glosować")
+                return ""
+            }
             var data = {
-                user_id: this.ProjektData.id_owner,
+                user_id: this.get_user(),
                 type: "comment",
                 object_id: comment_id,
                 is_upvote: is_upvote
@@ -140,7 +144,30 @@ export default {
                     this.CommentsProjekt.filter(comment => comment.id == comment_id)[0].downvotes += 1;
                 }
             }
-        }
+        },
+        get_cookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+            },
+            get_user(){
+                var owner_id = this.get_cookie("user-id")
+                if (owner_id.length == 32) {
+                    return owner_id;
+                } else {
+                    return ""
+                }
+            }
     }
 }
 </script>

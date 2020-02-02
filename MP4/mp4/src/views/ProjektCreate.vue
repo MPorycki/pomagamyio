@@ -261,7 +261,7 @@ export default {
                     flat_no: this.flat_no,
                     exact_location: this.exact_location
                     },
-                    owner_id: "0a99e58c3aba4cf89a36000ae5c7af02" //Hardcode, do zmiany potem
+                    owner_id: this.get_owner()
                 }
                 // Send up to API
                 if(this.validate_form()){
@@ -272,7 +272,29 @@ export default {
                         })
                 }
         },
-         
+        get_cookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+            },
+            get_owner(){
+                var owner_id = this.get_cookie("user-id")
+                if (owner_id.length == 32) {
+                    return owner_id;
+                } else {
+                    return "0a99e58c3aba4cf89a36000ae5c7af02"
+                }
+            }
     }
 }
 </script>

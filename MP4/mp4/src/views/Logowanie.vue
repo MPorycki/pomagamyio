@@ -27,15 +27,17 @@ export default {
                 login: this.login,
                 raw_password: document.getElementById("pass").value
             }
-            axios.post("http://127.0.0.1:5000/account/login", data).then(res => this.add_session_cookies(res.data["account_id"], res.data["session_id"]))
+            axios.post("https://s15307pomagamy.herokuapp.com/account/login", data).then(res => this.add_session_cookies(res.data["account_id"], res.data["session_id"]))
+            
         },
         add_session_cookies(user_id, session_id){
             var d = new Date();
             d.setTime(d.getTime() + (7*24*60*60*1000));
             var expires = "expires="+ d.toUTCString();
-            document.cookie = "session-d=" + session_id + ";" + expires + ";path=/";
+            document.cookie = "session-id=" + session_id + ";" + expires + ";path=/";
             document.cookie = "user-id=" +user_id +";" + expires + ";path=/";
             this.$router.push({ name: 'projekty', })
+            location.reload()
         }
     }
 }

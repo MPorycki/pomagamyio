@@ -176,12 +176,12 @@ export default {
                 surname: this.surname
             }
             if (this.validate_form()){
-                axios.post("http://127.0.0.1:5000/account/", data).then(res => this.register_success(res.data)).catch(error => this.handle_error(error.response.data));
+                axios.post("https://s15307pomagamy.herokuapp.com/account/", data).then(res => this.register_success(res.data)).catch(error => this.handle_error(error.response.data));
             }
         },
         register_success(message){
             alert(message);
-            this.$router.push({ name: 'projekty', })
+            this.$router.push({ name: 'logowanie', })
         },
         handle_error(error_data){
             if (error_data["username_taken"]){

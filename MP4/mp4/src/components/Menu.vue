@@ -4,15 +4,51 @@
         <ul>
             <li><router-link to="/" >Strona główna</router-link></li>
             <li><router-link to="/projekty" >Projekty</router-link></li>
-            <li><router-link to="/ranking" >Ranking Serc</router-link></li>
-            <li style="float:right"><router-link to="/logowanie" >Logowanie/Rejestracja</router-link></li>
+            <li><router-link to="/ranking" >Ranking Lajków</router-link></li>
+            <li style="float:right" v-if="this.session_id.length == 0"><router-link to="/logowanie" >Logowanie/Rejestracja</router-link></li>
+            <li style="float:right" v-else v-on:click="logout()"><a>Wyloguj</a></li>
         </ul>
     </div>
 </template>
 
 <script>
 export default {
+    data(){
+        return {
+            user_id: "",
+            session_id : ""
+        }
+    },
+    methods: {
+        get_session(){
+      this.user_id = this.get_cookie("user-id")
+      this.session_id = this.get_cookie("session-id")
+    },
+    get_cookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+     },
+     logout(){
+        document.cookie = "session-id=;"
+        document.cookie = "user-id=;" 
+        location.reload()
+    }
+    },
     
+    mounted(){
+        this.get_session()
+    }
 }
 </script>
 

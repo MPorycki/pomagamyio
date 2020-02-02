@@ -22,8 +22,12 @@ export default {
     props: ["projekt"],
     methods: {
         vote(is_upvote){
+            if (this.get_user().length == 0){
+                alert("Zaloguj sie, aby glosować")
+                return ""
+            }
             var data = {
-                user_id: this.projekt.id_owner,
+                user_id: this.get_user(),
                 type: "project",
                 object_id: this.projekt.id,
                 is_upvote: is_upvote
@@ -46,7 +50,30 @@ export default {
             } else {
                 return Description;
             }
-        }
+        },
+        get_cookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i <ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+            },
+            get_user(){
+                var owner_id = this.get_cookie("user-id")
+                if (owner_id.length == 32) {
+                    return owner_id;
+                } else {
+                    return ""
+                }
+            }
     }
 }
 
