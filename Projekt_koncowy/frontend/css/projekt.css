@@ -1,0 +1,169 @@
+.truebody {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100%;
+    grid-row: 3;
+}
+
+.basic_project_data {
+    height: 200px;
+    display: grid;
+    grid-template-columns: 3fr 10fr 4fr;
+    margin-top: 50px;
+}
+
+
+.basic_project_data p {
+    display: flex;
+    grid-column: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.text_box{
+    grid-column: 2;
+    border-style: solid;
+    border-width: 1px;
+    margin-right: 50px;
+    display: flex;
+    text-align: justify;
+    justify-content: center;
+    align-items: center;
+}
+
+.project_image {
+    grid-column: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project_image img{
+    width: 300px;
+    height: 200px;
+}
+
+.address_and_likes {
+    display: grid;
+    margin-top: 50px;
+    grid-template-columns: 3fr 5fr 5fr 4fr;
+}
+
+.address_and_likes p {
+    display: flex;
+    grid-column: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.google-earth {
+    height: 100px;;
+}
+
+.up_downvote {
+    grid-column: 4;
+    margin-left: 15px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    height: 100px;
+}
+
+.up_downvote img {
+    width: 30px;
+    height: 30px;
+}
+
+.up_downvote p {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.upvote_no {
+        grid-row: 3;
+        grid-column: 1; 
+        text-align: center;
+        margin-left: 25%;
+        margin-right: 25%;
+}
+
+.upvote_img {
+    grid-row: 2;
+    grid-column: 1;
+    align-items: center;
+}
+
+.downvote_img {
+    grid-row: 2;
+    grid-column: 2;
+}
+
+.downvote_no {
+    grid-row: 3;
+    grid-column: 2; 
+    text-align: center;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.signin_users {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    width: 90%;
+    margin-top: 50px;
+}
+
+.signup_button {
+    grid-column: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_table {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user_table table {
+    border: 3px solid black;
+    width: 80%;
+    
+}
+
+.user_table table th{
+    border: 1px solid black;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-left: 5%;
+    margin-bottom: 50px;
+}
+
+.comments_header {
+    display: flex;
+    flex-direction: row;
+}
+
+.comments_header form {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.comments table {
+    border: 3px solid black;
+    width: 100%;
+}
+
+.comments table th {
+    border: 1px solid black;
+}

@@ -1,0 +1,95 @@
+<html>
+    <head>
+        <title>Pomagajmy.io</title>
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/create_projekt.css" />
+        <script src="scripts/edytuj_projekt.js"></script>
+    </head>
+    <body>
+            <div class="header">
+                    <div onclick="location.href='index.html';" class="leftbuttons menubuttons">
+                        <h4>Strona główna</h4>
+                    </div>
+                    <div onclick="location.href='all_projekty.html';" class="leftbuttons menubuttons">
+                        <h4>Projekty</h4>
+                    </div>
+                    <div onclick="location.href='my_projekty.html';" class="leftbuttons menubuttons">
+                        <h4>Moje Projekty</h4>
+                    </div>
+                    <div onclick="location.href='ranking.html';" class="leftbuttons menubuttons">
+                        <h4>Ranking Serc</h4>
+                    </div>
+                    <div onclick="location.href='login.html';" class="menubuttons registrations">
+                            <h4>Logowanie/Rejestracja</h4>
+                    </div>
+                </div>
+        <div class="bigimage">
+            <div>
+            <h1>
+                Nazwa projektu
+            </h1>
+            </div>
+        </div>
+        <div class="truebody">
+            <h1>Edytuj wybrane pola</h1>
+            <form name="register" id="form" action="my_projekt_edycja.html" target="_blank" method="POST" onsubmit="return validate_form()">
+                <label class="namelebel" for="1">Nazwa inicjatywy</label>
+                <input type="text" id="1" name="name" value="Nazwa projektu"> 
+                <label class="lebel" id="name_error"></label> <br>
+
+                <label class="namelebel" for="2">Opis</label>
+                <textarea id="2" form="form" style="height: 100px;" name="description">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</textarea>
+                <label class="lebel"id="description_error" ></label> <br>
+
+                <label class="namelebel" for="3">Ile osób jest potrzebnych?</label>
+                <input type="text" id="3" name="people_req" value="12"> 
+                <label class="lebel" id="people_req_error"></label> <br>
+
+                <label class="namelebel" for="4">Zdjęcie "profilowe"</label>
+                <input type="file" id="4" name="profile_pic" onchange="check_img_width_profile(this);">
+                <label class="lebel" id="profile_pic_error"></label> <br>
+
+                <label class="namelebel" for="5">Zdjęcie w tle<br><i>Min. szerokość 1280px</i></label>
+                <input type="file" id="5" name="background_pic" onchange="check_img_width_background(this);"> 
+                <label class="lebel" id="background_pic_error"></label> <br>
+
+                <h4>Lokalizacja</h4>
+
+                <label class="namelebel" for="6">Miasto</label>
+                <input type="text" id="6" name="city" value="Warszawa">
+                <label class="lebel"id="city_error" ></label> <br>
+
+                <label class="namelebel" for="7">Kod pocztowy</label>
+                <input type="text" id="7" name="zip_code" value="05-222">
+                <label class="lebel" id="zip_error"></label> <br>
+
+                <label class="namelebel" for="8">Ulica</label>
+                <input type="text" id="8" name="street" value="Krucza">
+                <label class="lebel" id="street_error" ></label> <br>
+
+                <label class="namelebel" for="9">Nr budynku</label>
+                <input type="text" id="9" name="building_no" value="6">
+                <label class="lebel" id="building_no_error"></label> <br>
+
+                <label class="namelebel" for="6">Nr Mieszkania(opcjonalny)</label>
+                <input type="text" id="10" name="flat_no">
+                <label class="lebel" id="flat_no_error"></label> <br>
+
+                <h4>Czy jest to dokładna lokalizacja projektu czy punkt zbiórki</h4>
+                <div class="radio">
+                    <input type="radio" name="location" value="exact"> Dokładna lokalizacja
+                    <input type="radio" name="location" value="gathering" checked> Punkt zbiórki
+                </div>
+                <input type="submit" value="Zgłoś projekt">
+            </form>
+            
+        </div>
+        
+
+        <div class="footer">
+            <p>Prowadzone przez Fundacja Pomagajmy.io</p> <br>
+            <p> Ul. Pomocna 4 </p> <br>
+            <p>05-222 Warszawa</p>
+        </div>
+    </body>
+</html>
